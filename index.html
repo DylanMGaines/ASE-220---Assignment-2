@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+
+    <!--bootstrap css and icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+    <!--bootstrap js/popper (bundled)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn").click(function () {
+                alert("test");
+            })
+            $(".nav-item-list").click(function () {
+                alert("it work");
+            })
+        })
+        $(document).on("scroll", function () {
+
+            if ($(document).scrollTop() > 80) {
+                $(".primary-nav").addClass("shrink");
+                $(".col-md-9").addClass("display-5");
+                $(".bi-journal-code").addClass("shrunk");
+            } else {
+                $(".primary-nav").removeClass("shrink");
+                $(".col-md-9").removeClass("display-5");
+                $(".bi-journal-code").removeClass("shrunk");
+            }
+        });
+
+
+    </script>
+    <style>
+        .primary-nav {
+            transition: all 0.4s ease-in-out;
+            -webkit-transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+        }
+
+        .shrink {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            min-height: 55px !important;
+        }
+
+        .display-3,
+        .display-5 {
+            transition: all 0.5s ease-in-out;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+        }
+
+        .bi-journal-code {
+            font-size: 4rem;
+            transition: all 0.5s ease-in-out;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+        }
+
+        .shrunk {
+            font-size: 3rem;
+        }
+    </style>
+</head>
+
+<body class="bg-body">
+    <div class="sticky-top primary-nav">
+        <header class="navbar navbar-dark bg-dark text-white sticky-top primary-nav">
+            <div class="row-cols-3 container-fluid justify-content-evenly">
+                <div class="col-md-1 bi-journal-code float-start"></div>
+                <div class="col-md-9 display-3 px-sm-3 h-100">
+                    Tryhard blog
+                </div>
+                <form class="col-2">
+                    <button class="btn-sm btn-outline-light btn-dark float-end" type="button">Sign-In</button>
+                </form>
+            </div>
+        </header>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-secondary float-end position-fixed end-0 me-md-3"
+        aria-label="Fourth navbar example">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
+                aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample04">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item nav-item-list">
+                        <a class="nav-link" href="#">Post List</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="ph">
+            <div class="card m-4 p-3 w-75">
+                <div class="card-body visible">
+                    Sed praesentium qui odit. Architecto tenetur impedit reprehenderit velit totam quo enim. Mollitia
+                    omnis
+                    facilis consectetur ullam quod qui et eius. Voluptate ipsa ullam cumque. Et laborum vitae quia. Quas
+                    alias
+                    et ratione veniam debitis.
+
+                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
+                    dolores
+                    est.
+
+                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
+                    in
+                    modi
+                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
+
+                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
+                    voluptatem
+                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
+                    officia
+                    voluptate ex.
+
+                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
+                    Ut
+                    odit
+                    aut eius quam voluptatem possimus voluptate et.Sed praesentium qui odit. Architecto tenetur impedit
+                    reprehenderit velit totam quo enim. Mollitia omnis facilis consectetur ullam quod qui et eius.
+                    Voluptate
+                    ipsa ullam cumque. Et laborum vitae quia. Quas alias et ratione veniam debitis.
+
+                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
+                    dolores
+                    est.
+
+                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
+                    in
+                    modi
+                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
+
+                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
+                    voluptatem
+                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
+                    officia
+                    voluptate ex.
+
+                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
+                    Ut
+                    odit
+                    aut eius quam voluptatem possimus voluptate et.Sed praesentium qui odit. Architecto tenetur impedit
+                    reprehenderit velit totam quo enim. Mollitia omnis facilis consectetur ullam quod qui et eius.
+                    Voluptate
+                    ipsa ullam cumque. Et laborum vitae quia. Quas alias et ratione veniam debitis.
+
+                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
+                    dolores
+                    est.
+
+                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
+                    in
+                    modi
+                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
+
+                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
+                    voluptatem
+                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
+                    officia
+                    voluptate ex.
+
+                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
+                    Ut
+                    odit
+                    aut eius quam voluptatem possimus voluptate et.Sed praesentium qui odit. Architecto tenetur impedit
+                    reprehenderit velit totam quo enim. Mollitia omnis facilis consectetur ullam quod qui et eius.
+                    Voluptate
+                    ipsa ullam cumque. Et laborum vitae quia. Quas alias et ratione veniam debitis.
+
+                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
+                    dolores
+                    est.
+
+                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
+                    in
+                    modi
+                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
+
+                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
+                    voluptatem
+                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
+                    officia
+                    voluptate ex.
+
+                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
+                    Ut
+                    odit
+                    aut eius quam voluptatem possimus voluptate et.
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
