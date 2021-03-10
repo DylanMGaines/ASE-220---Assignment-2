@@ -7,209 +7,170 @@
     <title>Home</title>
 
     <!--bootstrap css and icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
     <!--bootstrap js/popper (bundled)-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".btn").click(function () {
-                alert("test");
-            })
-            $(".nav-item-list").click(function () {
-                alert("it work");
-            })
-        })
-        $(document).on("scroll", function () {
 
-            if ($(document).scrollTop() > 80) {
+    <link href="theVibe.css" rel="stylesheet">
+    <script>
+        $(document).ready(function() {
+            $(".nav-item-list").click(function() {
+                alert("it work");
+            });
+            $("#contact").click(function() {
+                alert("go away");
+            });
+        })
+        $(document).on("scroll", function() {
+            if ($(document).scrollTop() > 85) {
                 $(".primary-nav").addClass("shrink");
-                $(".col-md-9").addClass("display-5");
+                $(".title").addClass("display-5");
                 $(".bi-journal-code").addClass("shrunk");
+                $(".navbar-toggler-icon").addClass("icon-shrink");
             } else {
                 $(".primary-nav").removeClass("shrink");
-                $(".col-md-9").removeClass("display-5");
+                $(".title").removeClass("display-5");
                 $(".bi-journal-code").removeClass("shrunk");
+                $(".navbar-toggler-icon").removeClass("icon-shrink");
             }
         });
 
-
+        //temp until actual server-side validation is done
+        function subIt() {
+            var un, pw;
+            un = $("#player").val().trim();
+            pw = $("#key").val().trim();
+            if (un == "dylan" && pw == "pw") {
+                $("#theBlackDoor").attr("hidden", true);
+                $("#loader").attr("hidden", false);
+                $("#tester").addClass("theHandPrint");
+                $("#isValid").text("welcome home");
+                /*
+                setTimeout(() => {
+                    location = "admin/index.html";
+                }, 2000);
+                */
+            } else {
+                $("#isValid").text("you are not worthy");
+            }
+        }
     </script>
-    <style>
-        .primary-nav {
-            transition: all 0.4s ease-in-out;
-            -webkit-transition: all 0.4s ease-in-out;
-            -moz-transition: all 0.4s ease-in-out;
-        }
-
-        .shrink {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            min-height: 55px !important;
-        }
-
-        .display-3,
-        .display-5 {
-            transition: all 0.5s ease-in-out;
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-        }
-
-        .bi-journal-code {
-            font-size: 4rem;
-            transition: all 0.5s ease-in-out;
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-        }
-
-        .shrunk {
-            font-size: 3rem;
-        }
-    </style>
 </head>
 
 <body class="bg-body">
     <div class="sticky-top primary-nav">
-        <header class="navbar navbar-dark bg-dark text-white sticky-top primary-nav">
-            <div class="row-cols-3 container-fluid justify-content-evenly">
-                <div class="col-md-1 bi-journal-code float-start"></div>
-                <div class="col-md-9 display-3 px-sm-3 h-100">
+        <header class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
+            <div class="flex-row container-fluid">
+                <a href="index.html" class="link-light text-decoration-none"><i
+                        class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
+                <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
                     Tryhard blog
                 </div>
-                <form class="col-2">
-                    <button class="btn-sm btn-outline-light btn-dark float-end" type="button">Sign-In</button>
-                </form>
+                <div class="flex-lg-grow-0">
+                    <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav mb-2 d-inline-block container-fluid">
+                        <a href="index.html" class="text-decoration-none link-light">
+                            <li class="nav-link ps-3">
+                                Home
+                            </li>
+                        </a>
+                        <li class="nav-link ps-3" id="signin" data-bs-toggle="modal" data-bs-target="#signinmodal">
+                            Sign-in
+                        </li>
+                    </ul>
+                </div>
             </div>
         </header>
     </div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-secondary float-end position-fixed end-0 me-md-3"
-        aria-label="Fourth navbar example">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
-                aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExample04">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item nav-item-list">
-                        <a class="nav-link" href="#">Post List</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
     <main>
+        <!--overarching placeholder class-->
         <div class="ph">
-            <div class="card m-4 p-3 w-75">
-                <div class="card-body visible">
-                    Sed praesentium qui odit. Architecto tenetur impedit reprehenderit velit totam quo enim. Mollitia
-                    omnis
-                    facilis consectetur ullam quod qui et eius. Voluptate ipsa ullam cumque. Et laborum vitae quia. Quas
-                    alias
-                    et ratione veniam debitis.
-
-                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
-                    dolores
-                    est.
-
-                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
-                    in
-                    modi
-                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
-
-                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
-                    voluptatem
-                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
-                    officia
-                    voluptate ex.
-
-                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
-                    Ut
-                    odit
-                    aut eius quam voluptatem possimus voluptate et.Sed praesentium qui odit. Architecto tenetur impedit
-                    reprehenderit velit totam quo enim. Mollitia omnis facilis consectetur ullam quod qui et eius.
-                    Voluptate
-                    ipsa ullam cumque. Et laborum vitae quia. Quas alias et ratione veniam debitis.
-
-                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
-                    dolores
-                    est.
-
-                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
-                    in
-                    modi
-                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
-
-                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
-                    voluptatem
-                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
-                    officia
-                    voluptate ex.
-
-                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
-                    Ut
-                    odit
-                    aut eius quam voluptatem possimus voluptate et.Sed praesentium qui odit. Architecto tenetur impedit
-                    reprehenderit velit totam quo enim. Mollitia omnis facilis consectetur ullam quod qui et eius.
-                    Voluptate
-                    ipsa ullam cumque. Et laborum vitae quia. Quas alias et ratione veniam debitis.
-
-                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
-                    dolores
-                    est.
-
-                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
-                    in
-                    modi
-                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
-
-                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
-                    voluptatem
-                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
-                    officia
-                    voluptate ex.
-
-                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
-                    Ut
-                    odit
-                    aut eius quam voluptatem possimus voluptate et.Sed praesentium qui odit. Architecto tenetur impedit
-                    reprehenderit velit totam quo enim. Mollitia omnis facilis consectetur ullam quod qui et eius.
-                    Voluptate
-                    ipsa ullam cumque. Et laborum vitae quia. Quas alias et ratione veniam debitis.
-
-                    Similique quod iste vel quas accusantium ut. Nesciunt magni excepturi corporis. Omnis numquam
-                    dolores
-                    est.
-
-                    Rerum nam nihil exercitationem. Praesentium voluptas qui iste molestiae. Quos sed totam porro enim
-                    in
-                    modi
-                    ad. Labore impedit doloremque aut illo occaecati unde nam eum.
-
-                    Exercitationem quos et necessitatibus doloremque laudantium. Asperiores quis minus dolorem
-                    voluptatem
-                    tempore et. Consequuntur a dolorem a suscipit impedit. Eos sed non nostrum vel. Libero sit itaque a
-                    officia
-                    voluptate ex.
-
-                    Iusto autem laborum quis necessitatibus. Ex voluptatem non maiores fuga. Saepe dolor dolore debitis.
-                    Ut
-                    odit
-                    aut eius quam voluptatem possimus voluptate et.
+            <!--card holding container class (the deck, if you will)-->
+            <div class="container-md m-1 p-0 m-lg-4 p-lg-3 w-75">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <!--card holding tag is a to make entire card a clickable link-->
+                    <a href="article.html" class="text-decoration-none text-body">
+                        <div class="col">
+                            <div class="card mb-3 h-auto" style="height: 20rem;">
+                                <img src="media/download.jpg" class="card-img-top h-50" alt="...">
+                                <div class="card-body ms-1 me-1 h-50">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is the bit with the grabber/lead</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-secondary" type="button">Load More</button>
             </div>
         </div>
     </main>
+
+    <!--footer-->
+    <footer class="container-fluid pt-5 pb-3 bg-dark text-muted">
+        <ul class="d-inline-block container-fluid list-unstyled list-group-flush">
+            <li class="h5 m-0">
+                Links
+            </li>
+            <li class="ps-3">
+                <a href="index.html" class="link-secondary">
+                    Home
+                </a>
+            </li>
+            <li class="ps-3" id="signinFoot">
+                <a href="index.html" class="link-secondary" data-bs-toggle="modal" data-bs-target="#signinmodal">
+                    Sign-in
+                </a>
+            </li>
+            <li class="ps-3 link-secondary" id="contact">
+                Contact
+            </li>
+        </ul>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="signinmodal" tabindex="-1" aria-labelledby="gateway" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="tester">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gateway">Gateway</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="row g-3" id="theBlackDoor" novalidate>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="player" placeholder="I? I am a monument to all your sin.">
+                            <label for="floatingInput">Who Are You?</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="key" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="subIt()">Sign in</button>
+                    </div>
+                </form>
+                <div class="spinner-border align-self-center mt-4" role="status" id="loader" hidden="true">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p id="isValid" class="align-self-center"></p>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
