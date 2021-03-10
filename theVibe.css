@@ -45,20 +45,6 @@
     background-color: #495057;
 }
 
-.card:hover {
-    transform: scale(1.1);
-    z-index: 500;
-    transition: all 0.25s ease-in-out;
-    -webkit-transition: all 0.25s ease-in-out;
-    -moz-transition: all 0.25s ease-in-out;
-}
-
-.card {
-    transition: all 0.25s ease-in-out;
-    -webkit-transition: all 0.25s ease-in-out;
-    -moz-transition: all 0.25s ease-in-out;
-}
-
 .theHandPrint {
     background-image: url("media/theHand.png");
     background-size: 4%;
