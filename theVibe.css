@@ -54,6 +54,8 @@
     background-repeat: no-repeat;
 }
 
+.thatLikeButton {}
+
 #signin:hover {
     cursor: pointer;
 }

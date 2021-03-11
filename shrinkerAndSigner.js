@@ -5,7 +5,7 @@ $(document).ready(function() {
     $("#contact").click(function() {
         alert("go away");
     });
-})
+});
 $(document).on("scroll", function() {
     if ($(document).scrollTop() > 85) {
         $(".primary-nav").addClass("shrink");
@@ -26,7 +26,7 @@ function subIt() {
     un = $("#player").val().trim();
     pw = $("#key").val().trim();
     if (un == "dylan" && pw == "pw") {
-        $("#theBlackDoor").attr("hidden", true);
+        $("#theBlackDoor").toggle();
         $("#loader").attr("hidden", false);
         $("#tester").addClass("theHandPrint");
         $("#isValid").text("welcome home");
