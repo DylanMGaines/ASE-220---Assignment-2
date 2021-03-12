@@ -15,7 +15,7 @@ $(document).ready(function() {
         var $theStuff = $('#changee', $eModal);
 
         $theThing.text($titled);
-        $theStuff.text($contenta).wrap('<code></code>');
+        $theStuff.text($contenta).wrap('<pre class="pre-scrollable"></pre>');
     });
     var $iModal = $('#imageModal');
     $iModal.bind('show.bs.modal', function(event) {

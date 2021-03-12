@@ -15,59 +15,115 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link href="theVibe.css" rel="stylesheet">
-    <script src="shrinkerAndSigner.js">
+    <link href="../iCSS/theVibe.css" rel="stylesheet">
+    <script src="../iJS/shrinker.js"></script>
+    <script src="../iJS/signer.js"></script>
+    <script src="./aJS/articleLoader.js"></script>
+    <script src="./aJS/loader.js"></script>
+    <script>
+        $(document).ready(function() {
+            letsRock();
+            var $imgHolder = $('#clickBait');
+            $("#formFile", $imgHolder).change(function() {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#newImg').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+                $("#iPh").toggle();
+            });
+        });
     </script>
+    <noscript>Get JavaScript to properly view page</noscript>
+    <style>
+        #commitButton {
+            right: 5%;
+            bottom: 5%;
+            width: 3rem;
+            height: 3rem;
+            transition: all 0.25s ease-in-out;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
+        }
+        
+        #commitButton:hover {
+            width: 15rem;
+            transition: all 0.25s ease-in-out;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
+        }
+        
+        #commitButton:hover::after {
+            content: "commit changes";
+        }
+    </style>
 </head>
 
-<nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
-    <div class="flex-row container-fluid">
-        <a href="index.html" class="link-light text-decoration-none"><i
+<body class="bg-body">
+    <nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
+        <div class="flex-row container-fluid">
+            <a href="index.html" class="link-light text-decoration-none"><i
                     class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
-        <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
-            Tryhard blog
-        </div>
-        <div class="flex-lg-grow-0">
-            <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
+                Tryhard blog
+            </div>
+            <div class="flex-lg-grow-0">
+                <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+            </div>
+            <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav mb-2 d-inline-block container-fluid">
+                    <a href="index.html" class="text-decoration-none link-light">
+                        <li class="nav-link ps-3">
+                            Home
+                        </li>
+                    </a>
+                    <div onclick="gtfo()" class="text-decoration-none link-light" id="signin">
+                        <li class="nav-link ps-3">
+                            Sign Out
+                        </li>
+                    </div>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav mb-2 d-inline-block container-fluid">
-                <a href="index.html" class="text-decoration-none link-light">
-                    <li class="nav-link ps-3">
-                        Home
-                    </li>
-                </a>
-                <li class="nav-link ps-3" id="signin" data-bs-toggle="modal" data-bs-target="#signinmodal">
-                    Sign-in
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
 
-<body class="bg-body">
     <main>
         <!--overarching placeholder class-->
         <div class="ph">
             <div class="card m-4 p-3">
-                <div class="ms-3 display-4">Test Title</div>
-                <div class="card-body">
-                    <div class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Arcu vitae elementum curabitur vitae nunc sed velit. Tempus imperdiet nulla malesuada pellentesque
-                        elit eget gravida. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Enim neque volutpat ac tincidunt. Egestas sed tempus urna et pharetra pharetra. Condimentum vitae sapien pellentesque habitant morbi tristique
-                        senectus. In mollis nunc sed id semper. Fermentum et sollicitudin ac orci phasellus egestas tellus. Ornare quam viverra orci sagittis eu volutpat odio. Nam aliquam sem et tortor consequat id porta nibh venenatis. Ac turpis egestas
-                        maecenas pharetra convallis posuere morbi. Suscipit tellus mauris a diam maecenas sed. Vestibulum morbi blandit cursus risus at ultrices. Consequat interdum varius sit amet. Vel pharetra vel turpis nunc eget lorem dolor. Et magnis
-                        dis parturient montes nascetur. Diam maecenas ultricies mi eget mauris. Eu scelerisque felis imperdiet proin. Mauris pharetra et ultrices neque ornare. Morbi leo urna molestie at elementum eu facilisis. Eu scelerisque felis imperdiet
-                        proin fermentum leo vel. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. Varius vel pharetra vel turpis nunc eget lorem. Tristique sollicitudin nibh
-                        sit amet commodo nulla. Eget lorem dolor sed viverra. Maecenas accumsan lacus vel facilisis volutpat est. Metus dictum at tempor commodo ullamcorper. Feugiat nibh sed pulvinar proin gravida hendrerit lectus. Mi quis hendrerit dolor
-                        magna eget est lorem ipsum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Bibendum est ultricies integer quis. Purus non enim praesent elementum. Feugiat nibh sed pulvinar proin gravida hendrerit lectus. At tempor
-                        commodo ullamcorper a lacus. Donec et odio pellentesque diam volutpat commodo. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Ut eu sem integer vitae. Eu lobortis elementum nibh tellus molestie. Phasellus
-                        faucibus scelerisque eleifend donec. Quis varius quam quisque id diam vel quam.
+                <form>
+                    <div col="d-flex">
+                        <div class="flex-row">
+
+                            <div class="col-10 flex-column">
+                                <textarea class="display-3 container-fluid" rows=2 id="title" placeholder="Title"></textarea>
+                            </div>
+
+                            <div class="ms-4" id="subtitle">
+                                <textarea class="lead container-fluid" rows=2 id="subtitle" placeholder="Subtitle"></textarea>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                    <hr class="mb-2 mt-1">
+                    <figure class="figure" id="clickBait">
+                        <img src="" class="card-img-top img-fluid w-auto figure-img" id="newImg">
+                        <div class="bi-image-fill display-6 bg-secondary text-center p-5 text-white" id="iPh"> No Image Selected</div>
+                        <input class="form-control" type="file" id="formFile">
+                        <textarea class="figure-caption w-100" rows=1 id="caption" placeholder="Caption"></textarea>
+                    </figure>
+                    <div class="card-body">
+                        <textarea class="form-control" rows=15 id="body" placeholder="body paragraph"></textarea>
+                    </div>
+                </form>
             </div>
+        </div>
+
+        <button class="btn-outline-dark rounded-pill text-center text-nowrap position-fixed rounded-circle 
+        ratio-1x1 bi-file-earmark-arrow-up fs-5 overflow-hidden" id="commitButton">
+        </button>
     </main>
 
     <!--footer-->
@@ -81,49 +137,11 @@
                     Home
                 </a>
             </li>
-            <li class="ps-3" id="signinFoot">
-                <a href="index.html" class="link-secondary" data-bs-toggle="modal" data-bs-target="#signinmodal">
-                    Sign-in
-                </a>
-            </li>
-            <li class="ps-3 link-secondary" id="contact">
+            <li class="ps-3 link-secondary text-decoration-underline" id="contact">
                 Contact
             </li>
         </ul>
     </footer>
-
-    <!-- Modal -->
-    <div class="modal fade" id="signinmodal" tabindex="-1" aria-labelledby="gateway" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="tester">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="gateway">Gateway</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form class="row g-3" id="theBlackDoor" novalidate>
-                    <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="player" placeholder="I? I am a monument to all your sin.">
-                            <label for="floatingInput">Who Are You?</label>
-                        </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="key" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="subIt()">Sign in</button>
-                    </div>
-                </form>
-                <div class="spinner-border align-self-center mt-4" role="status" id="loader" hidden="true">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p id="isValid" class="align-self-center"></p>
-            </div>
-        </div>
-    </div>
-
 </body>
 
 </html>
