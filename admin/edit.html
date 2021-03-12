@@ -15,59 +15,61 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link href="theVibe.css" rel="stylesheet">
-    <script src="shrinkerAndSigner.js">
+    <link href="../theVibe.css" rel="stylesheet">
+    <script src="../shrinker.js"></script>
+    <script src="../signer.js"></script>
+    <script src="articleLoader.js"></script>
+    <script src="loader.js"></script>
+    <script>
+        $(document).ready(function() {
+            letsRock();
+        });
+
+        function gtfo() {
+            oCount++;
+            if (oCount >= 3) {
+                oCount = 0;
+                loader('o');
+            }
+        }
     </script>
 </head>
 
-<nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
-    <div class="flex-row container-fluid">
-        <a href="index.html" class="link-light text-decoration-none"><i
+<body class="bg-body">
+    <nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
+        <div class="flex-row container-fluid">
+            <a href="index.html" class="link-light text-decoration-none"><i
                     class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
-        <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
-            Tryhard blog
-        </div>
-        <div class="flex-lg-grow-0">
-            <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
+                Tryhard blog
+            </div>
+            <div class="flex-lg-grow-0">
+                <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+            </div>
+            <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav mb-2 d-inline-block container-fluid">
+                    <a href="index.html" class="text-decoration-none link-light">
+                        <li class="nav-link ps-3">
+                            Home
+                        </li>
+                    </a>
+                    <div onclick="gtfo()" class="text-decoration-none link-light" id="signin">
+                        <li class="nav-link ps-3">
+                            Sign Out
+                        </li>
+                    </div>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav mb-2 d-inline-block container-fluid">
-                <a href="index.html" class="text-decoration-none link-light">
-                    <li class="nav-link ps-3">
-                        Home
-                    </li>
-                </a>
-                <li class="nav-link ps-3" id="signin" data-bs-toggle="modal" data-bs-target="#signinmodal">
-                    Sign-in
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
 
-<body class="bg-body">
     <main>
         <!--overarching placeholder class-->
         <div class="ph">
-            <div class="card m-4 p-3">
-                <div class="ms-3 display-4">Test Title</div>
-                <div class="card-body">
-                    <div class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Arcu vitae elementum curabitur vitae nunc sed velit. Tempus imperdiet nulla malesuada pellentesque
-                        elit eget gravida. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Enim neque volutpat ac tincidunt. Egestas sed tempus urna et pharetra pharetra. Condimentum vitae sapien pellentesque habitant morbi tristique
-                        senectus. In mollis nunc sed id semper. Fermentum et sollicitudin ac orci phasellus egestas tellus. Ornare quam viverra orci sagittis eu volutpat odio. Nam aliquam sem et tortor consequat id porta nibh venenatis. Ac turpis egestas
-                        maecenas pharetra convallis posuere morbi. Suscipit tellus mauris a diam maecenas sed. Vestibulum morbi blandit cursus risus at ultrices. Consequat interdum varius sit amet. Vel pharetra vel turpis nunc eget lorem dolor. Et magnis
-                        dis parturient montes nascetur. Diam maecenas ultricies mi eget mauris. Eu scelerisque felis imperdiet proin. Mauris pharetra et ultrices neque ornare. Morbi leo urna molestie at elementum eu facilisis. Eu scelerisque felis imperdiet
-                        proin fermentum leo vel. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. Varius vel pharetra vel turpis nunc eget lorem. Tristique sollicitudin nibh
-                        sit amet commodo nulla. Eget lorem dolor sed viverra. Maecenas accumsan lacus vel facilisis volutpat est. Metus dictum at tempor commodo ullamcorper. Feugiat nibh sed pulvinar proin gravida hendrerit lectus. Mi quis hendrerit dolor
-                        magna eget est lorem ipsum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Bibendum est ultricies integer quis. Purus non enim praesent elementum. Feugiat nibh sed pulvinar proin gravida hendrerit lectus. At tempor
-                        commodo ullamcorper a lacus. Donec et odio pellentesque diam volutpat commodo. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Ut eu sem integer vitae. Eu lobortis elementum nibh tellus molestie. Phasellus
-                        faucibus scelerisque eleifend donec. Quis varius quam quisque id diam vel quam.
-                    </div>
-                </div>
-            </div>
+            <div id="testHolder"></div>
+        </div>
     </main>
 
     <!--footer-->
@@ -123,6 +125,43 @@
             </div>
         </div>
     </div>
+
+    <!--template for article-->
+    <template id="templart">
+        <div class="card m-4 p-3">
+            <div col="d-flex">
+                <div class="flex-row">
+                    <div class="col-10 flex-column float-start">
+                        <div class="ms-3 display-3" id="title"></div>
+                        <div class="fs-5 text-black-50 ms-4" id="subtitle"></div>
+                    </div>
+                    <div class="col-1 me-3 float-end py-5">
+                        <button type="button" onclick="smash('T')"
+                            class="btn btn-outline-dark bi-hand-thumbs-up col-auto" id="thatLikeButtonT"
+                            data-bs-toggle="button" autocomplete="off">
+                            <span class="col-auto badge rounded-pill bg-light text-black-50" id="counter"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="mb-2 mt-1">
+            <figure class="figure">
+                <img src="" class="card-img-top img-fluid w-auto figure-img">
+                <figcaption class="figure-caption"></figcaption>
+            </figure>
+            <div class="card-body">
+                <p class="card-text" id="qualityContent"></p>
+            </div>
+
+            <div class="row align-self-end me-3">
+                <button type="button" onclick="smash('B')" class="btn btn-outline-dark bi-hand-thumbs-up col-auto"
+                    id="thatLikeButtonB" data-bs-toggle="button" autocomplete="off">
+                    <span class="col-auto badge rounded-pill bg-light text-black-50" id="underCount"></span>
+                    <!--this ^ is going to be annoying to configure, I know it, I'm so not looking forward to it, I'm really not-->
+                </button>
+            </div>
+        </div>
+    </template>
 
 </body>
 

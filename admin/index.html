@@ -16,11 +16,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link href="../theVibe.css" rel="stylesheet">
-    <script src="../shrinker.js">
-    </script>
-    <script src="loader.js">
-    </script>
+    <script src="../shrinker.js"></script>
+    <script src="loader.js"></script>
     <script src="cardLoader.js"></script>
+    <script>
+        function cardLoader() {
+            let imgSrc = 'media/download.jpg';
+            let timeTrial = 3;
+            let nameTag = 'title';
+            let newRL = "edit.html"; //THIS IS BROKEN AND I HAVE ACCEPTED THAT, BUT I WANT TO SCREEEEEEEEEEEEEAM
+            let bio = 'This is the bit with the grabber/lead';
+            let $htmlString = $("#cardTemplate").clone(false).contents();
+            $(".link-dark", $htmlString).attr("href", newRL);
+            $('.card-img-top', $htmlString).attr('src', imgSrc);
+            $('.card-title', $htmlString).append(nameTag);
+            $('.card-text', $htmlString).append(bio);
+            $('.text-muted', $htmlString).append('Last Updated ' + timeTrial + ' minutes ago');
+            for (var i = 0; i <= 9; i++) {
+                let $cloneString = $($htmlString).clone(true);
+                $('#testHolder').before($cloneString);
+            }
+        }
+    </script>
     <script>
         $(document).ready(function() {
             cardLoader();
@@ -57,6 +74,21 @@
         
         #createButton:hover::after {
             content: "create";
+        }
+        
+        .card:hover {
+            transform: scale(1.01);
+            z-index: 500;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
+        }
+        
+        .card {
+            transition: all 0.25s ease-in-out;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
         }
     </style>
 </head>
@@ -129,19 +161,21 @@
 
     <!--template-->
     <template id="cardTemplate">
-        <div class="col">
-            <div class="card">
-                <img src="" class="card-img-top h-auto" alt="..." style="height:10rem;">
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text"></p>
+        <a href="edit.html" class="text-decoration-none link-dark">
+            <div class="col">
+                <div class="card">
+                    <img src="" class="card-img-top h-auto" alt="..." style="height:10rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"></h5>
+                        <p class="card-text small text-body"></p>
+                    </div>
+                    <!--card body-->
+                    <div class='card-footer'><small class='text-muted'></small></div>
                 </div>
-                <!--card body-->
-                <div class='card-footer'><small class='text-muted'></small></div>
+                <!--card-->
             </div>
-            <!--card-->
-        </div>
-        <!--col-->
+            <!--col-->
+        </a>
     </template>
 </body>
 
