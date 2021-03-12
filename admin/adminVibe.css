@@ -1,0 +1,29 @@
+#title:hover {
+    outline-style: solid;
+    outline-color: black;
+    cursor: pointer;
+}
+
+#subtitle:hover {
+    outline-style: solid;
+    outline-color: black;
+    cursor: pointer;
+}
+
+#clickbait:hover {
+    outline-style: solid;
+    outline-color: black;
+    cursor: pointer;
+}
+
+.figure-caption:hover {
+    outline-style: solid;
+    outline-color: black;
+    cursor: pointer;
+}
+
+#qualityContent:hover {
+    outline-style: solid;
+    outline-color: black;
+    cursor: pointer;
+}

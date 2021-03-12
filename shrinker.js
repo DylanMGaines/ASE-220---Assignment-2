@@ -1,11 +1,9 @@
 $(document).ready(function() {
-    $(".nav-item-list").click(function() {
-        alert("it work");
-    });
     $("#contact").click(function() {
         alert("go away");
     });
 });
+
 $(document).on("scroll", function() {
     if ($(document).scrollTop() > 85) {
         $(".primary-nav").addClass("shrink");

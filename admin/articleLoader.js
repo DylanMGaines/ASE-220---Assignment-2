@@ -5,7 +5,7 @@ function letsRock() {
     let nameTag = 'title';
     let counter = 7;
     let minilad = "this is a cool kid's subtitle";
-    let contento = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
+    let contento = "<p class='card-body'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
         "incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Arcu vitae elementum curabitur vitae" +
         " nunc sed velit. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. Venenatis tellus in metus " +
         "vulputate eu scelerisque felis imperdiet. Enim neque volutpat ac tincidunt. Egestas sed tempus urna et " +
@@ -25,32 +25,13 @@ function letsRock() {
         "enim praesent elementum. Feugiat nibh sed pulvinar proin gravida hendrerit lectus. At tempor commodo " +
         "ullamcorper a lacus. Donec et odio pellentesque diam volutpat commodo. Aliquet sagittis id consectetur " +
         "purus ut faucibus pulvinar elementum. Ut eu sem integer vitae. Eu lobortis elementum nibh tellus molestie. " +
-        "Phasellus faucibus scelerisque eleifend donec. Quis varius quam quisque id diam vel quam.";
+        "Phasellus faucibus scelerisque eleifend donec. Quis varius quam quisque id diam vel quam.</p>";
     let $htmlString = $("#templart").clone(false).contents();
     $('.figure-img', $htmlString).attr('src', imgSrc);
     $('#title', $htmlString).append(nameTag);
     $('#subtitle', $htmlString).append(minilad);
     $('#qualityContent', $htmlString).append(contento);
     $('.figure-caption', $htmlString).append(imgCap);
-    $('#underCount', $htmlString).append(counter);
     $('#counter', $htmlString).append(counter);
     $('#testHolder').before($htmlString);
-}
-
-function smash(whichOne) {
-    var theOne = (whichOne == 'B') ? $("#thatLikeButtonB") : $("#thatLikeButtonT");
-    var theOther = (whichOne == 'T') ? $("#thatLikeButtonB") : $("#thatLikeButtonT");
-    var cVal = parseInt($('#counter').text());
-    console.log(cVal);
-    if (theOne.hasClass('active') == true) {
-        cVal++;
-    } else if (theOne.hasClass('active') == false) {
-        cVal--;
-    }
-    console.log(cVal);
-    theOther.toggleClass("active");
-    $('#counter').text(cVal);
-    $('#underCount').text(cVal);
-    theOne.blur();
-    theOther.blur();
 }

@@ -16,23 +16,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link href="../theVibe.css" rel="stylesheet">
+    <link href="adminVibe.css" rel="stylesheet">
     <script src="../shrinker.js"></script>
     <script src="../signer.js"></script>
     <script src="articleLoader.js"></script>
     <script src="loader.js"></script>
-    <script>
-        $(document).ready(function() {
-            letsRock();
-        });
+    <script src="modal.js"></script>
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
 
-        function gtfo() {
-            oCount++;
-            if (oCount >= 3) {
-                oCount = 0;
-                loader('o');
-            }
+    <style>
+        #commitButton {
+            right: 5%;
+            bottom: 5%;
+            width: 3rem;
+            height: 3rem;
+            transition: all 0.25s ease-in-out;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
         }
-    </script>
+        
+        #commitButton:hover {
+            width: 15rem;
+            transition: all 0.25s ease-in-out;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
+        }
+        
+        #commitButton:hover::after {
+            content: "commit changes";
+        }
+    </style>
 </head>
 
 <body class="bg-body">
@@ -70,6 +83,9 @@
         <div class="ph">
             <div id="testHolder"></div>
         </div>
+        <button class="btn-outline-dark rounded-pill text-center text-nowrap position-fixed rounded-circle 
+        ratio-1x1 bi-file-earmark-arrow-up fs-5 overflow-hidden" id="commitButton">
+        </button>
     </main>
 
     <!--footer-->
@@ -83,45 +99,65 @@
                     Home
                 </a>
             </li>
-            <li class="ps-3" id="signinFoot">
-                <a href="index.html" class="link-secondary" data-bs-toggle="modal" data-bs-target="#signinmodal">
-                    Sign-in
-                </a>
-            </li>
-            <li class="ps-3 link-secondary" id="contact">
+            <li class="ps-3 link-secondary text-decoration-underline" id="contact">
                 Contact
             </li>
         </ul>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="signinmodal" tabindex="-1" aria-labelledby="gateway" aria-hidden="true">
+    <!-- Text Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="afterFX" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" id="tester">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="gateway">Gateway</h5>
+                    <h5 class="modal-title" id="afterFX">Edit time</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="row g-3" id="theBlackDoor" novalidate>
+                <form class="row g-3" id="changingRoom">
                     <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="player" placeholder="I? I am a monument to all your sin.">
-                            <label for="floatingInput">Who Are You?</label>
+                        <div class="mb-3">
+                            <label for="changee" class="form-label"></label>
+                            <textarea class="form-control" id="changee" rows="10" style="font-size: x-small;"></textarea>
                         </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="key" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary disabled">Send message</button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="subIt()">Sign in</button>
                     </div>
                 </form>
-                <div class="spinner-border align-self-center mt-4" role="status" id="loader" hidden="true">
-                    <span class="visually-hidden">Loading...</span>
+                <!--possibly a button for uploading html in the future???-->
+            </div>
+        </div>
+    </div>
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="afterFX" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photoshop">Edit time</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <p id="isValid" class="align-self-center"></p>
+                <form class="row g-3">
+                    <div class="modal-body">
+                        <div class="mb-3 d-flex">
+                            <div class="card-group flex-row">
+                                <div class="card w-50">
+                                    <img class="card-img-top h-auto" id='prevImg' src="">
+                                    <label id="imgLbl" for="prevImg"></label>
+                                </div>
+                                <div class="card w-50">
+                                    <img class="card-img-top h-auto" id='newImg' src="">
+                                    <input class="form-control" type="file" id="formFile">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary disabled">Send message</button>
+                        </div>
+                    </div>
+                </form>
+                <!--possibly a button for uploading html in the future???-->
             </div>
         </div>
     </div>
@@ -132,13 +168,14 @@
             <div col="d-flex">
                 <div class="flex-row">
                     <div class="col-10 flex-column float-start">
-                        <div class="ms-3 display-3" id="title"></div>
-                        <div class="fs-5 text-black-50 ms-4" id="subtitle"></div>
+                        <div class="ms-3 display-3" id="title" data-bs-toggle="modal" data-bs-target="#editModal"
+                            title='title'></div>
+                        <div class="lead ms-4" id="subtitle" data-bs-toggle="modal" title='subtile'
+                            data-bs-target="#editModal"></div>
                     </div>
                     <div class="col-1 me-3 float-end py-5">
-                        <button type="button" onclick="smash('T')"
-                            class="btn btn-outline-dark bi-hand-thumbs-up col-auto" id="thatLikeButtonT"
-                            data-bs-toggle="button" autocomplete="off">
+                        <button type="button" class="btn disabled btn-outline-dark bi-hand-thumbs-up col-auto"
+                            id="thatLikeButtonT" data-bs-toggle="button" autocomplete="off">
                             <span class="col-auto badge rounded-pill bg-light text-black-50" id="counter"></span>
                         </button>
                     </div>
@@ -146,19 +183,14 @@
             </div>
             <hr class="mb-2 mt-1">
             <figure class="figure">
-                <img src="" class="card-img-top img-fluid w-auto figure-img">
-                <figcaption class="figure-caption"></figcaption>
+                <img src="" class="card-img-top img-fluid w-auto figure-img" title='clickbait' id='clickbait'
+                    data-bs-toggle="modal" data-bs-target="#imageModal">
+                <figcaption class="figure-caption" title='figCap' data-bs-toggle="modal" data-bs-target="#editModal">
+                </figcaption>
             </figure>
-            <div class="card-body">
-                <p class="card-text" id="qualityContent"></p>
-            </div>
-
-            <div class="row align-self-end me-3">
-                <button type="button" onclick="smash('B')" class="btn btn-outline-dark bi-hand-thumbs-up col-auto"
-                    id="thatLikeButtonB" data-bs-toggle="button" autocomplete="off">
-                    <span class="col-auto badge rounded-pill bg-light text-black-50" id="underCount"></span>
-                    <!--this ^ is going to be annoying to configure, I know it, I'm so not looking forward to it, I'm really not-->
-                </button>
+            <!--may be changed for paragraph by paragraph editing-->
+            <div class="card-body" id="qualityContent" title='article content in html' data-bs-toggle="modal"
+                data-bs-target="#editModal">
             </div>
         </div>
     </template>
