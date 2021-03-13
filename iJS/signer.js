@@ -6,7 +6,7 @@ function subIt() {
     if (un == "dylan" && pw == "pw") {
         $("#theBlackDoor").toggle();
         $("#loader").attr("hidden", false);
-        $("#tester").addClass("theHandPrint");
+        $("#modalMan").addClass("theHandPrint");
         $("#isValid").text("welcome home");
 
         setTimeout(() => {

@@ -1,41 +1,46 @@
 .shrink {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    min-height: 3rem !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 1rem;
 }
 
 .icon-shrink {
     font-size: 1rem;
+    padding-top: 0;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
 }
 
-.primary-nav {
-    transition: all 0.3s ease-in-out;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
+.primary-nav,
+.navbar-toggler-icon {
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
 }
 
-.display-2,
-.display-5 {
+.display-4 {
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+}
+
+.display-6 {
+    font-size: 1.75rem;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
 }
 
 .bi-journal-code {
-    font-size: 4rem;
+    font-size: 3rem;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
 }
 
 .shrunk {
-    font-size: 3rem;
-}
-
-.navbar-toggler-icon {
+    font-size: 2rem;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
@@ -46,7 +51,7 @@
 }
 
 .theHandPrint {
-    background-image: url("media/theHand.png");
+    background-image: url("../media/theHand.png");
     background-size: 4%;
     background-origin: content-box;
     background-position-x: 50%;
@@ -62,10 +67,10 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:767px) {
     .bi-journal-code {
-        text-align: center;
-        font-size: 3rem;
+        text-align: start;
+        font-size: 2rem;
         transition: all 0.4s ease-in-out;
         -webkit-transition: all 0.4s ease-in-out;
         -moz-transition: all 0.4s ease-in-out;
@@ -73,28 +78,30 @@
     .bi-journal-code::after {
         content: " Tryhard blog";
         font-size: 1.25rem;
-        vertical-align: 40%;
+        vertical-align: 20%;
         transition: all 0.4s ease-in-out;
         -webkit-transition: all 0.4s ease-in-out;
         -moz-transition: all 0.4s ease-in-out;
     }
     .shrunk {
-        font-size: 2rem;
+        font-size: 1.69rem;
     }
     .shrunk::after {
         font-size: 1rem;
-        vertical-align: 30%;
+        vertical-align: 20%;
     }
 }
 
 @media only screen and (max-width:280px) {
     .bi-journal-code {
-        font-size: 2.1rem;
+        font-size: 1.5rem;
     }
     .bi-journal-code::after {
-        vertical-align: 20%;
+        vertical-align: 10%;
+        padding-right: 0;
+        margin-right: 0;
     }
-    .navbar-toggler-icon {
-        font-size: 1rem;
+    .bi-signpost-split {
+        font-size: .75rem;
     }
 }
