@@ -20,29 +20,7 @@
     <script src="./iJS/shrinker.js"></script>
     <script src="./iJS/signer.js"></script>
     <script>
-        $(document).ready(function() {
-            var currentLoaded;
-            $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
-                //initial load (loads 6)
-                let template;
-                $.getJSON("./assets/templates.json", function(templates) {
-                    template = templates.card;
-                    for (currentLoaded = 0; currentLoaded < data.length && currentLoaded < 6; currentLoaded++) {
-                        cardLoader(data, currentLoaded, template);
-                    }
-                    //load button clicked (loads 6 more)
-                    $("#loadButton").click(function() {
-                        for (; currentLoaded < data.length && currentLoaded < 6; currentLoaded++) {
-                            cardLoader(data, currentLoaded);
-                            console.log(data[currentLoaded]);
-                        }
-                    });
-                });
-            });
-            $.getJSON("./assets/modals.json", function(modals) {
-                $(".bg-body").append(modals.signInModal);
-            });
-        });
+        $(document).ready(placehold());
     </script>
     <style>
         .card:hover {
@@ -65,9 +43,11 @@
     <div class="flex-row container-fluid">
         <a href="index.html" class="link-light text-decoration-none"><i
                 class="py-1 bi-journal-code m-0 flex-fill"></i></a>
-        <div class="title py-2 display-4 flex-fill ps-sm-3 h-100 d-none d-md-block">
-            Tryhard blog
-        </div>
+        <a href="index.html" class="link-light flex-fill text-decoration-none">
+            <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
+                Tryhard blog
+            </div>
+        </a>
         <div class="flex-lg-grow-0">
             <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon align-self-center"></span>
@@ -121,7 +101,7 @@
                     Sign-in
                 </a>
             </li>
-            <li class="ps-3 link-secondary" id="contact">
+            <li class="ps-3 link-secondary text-decoration-underline" id="contact">
                 Contact
             </li>
         </ul>

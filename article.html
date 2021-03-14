@@ -20,45 +20,21 @@
     <script src="./iJS/signer.js"></script>
     <script src="./iJS/articleLoader.js"></script>
     <script>
-        function letsRock() {
-            let imgSrc = 'media/download.jpg';
-            $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
-                let dateMade = new Date(data.article1.dateMade);
-                let timeTrial = Math.round(Math.abs(((new Date().getTime()) - (dateMade).getTime()) / (24 * 60 * 60 * 1000)));
-
-                let $htmlString = $("#templart").clone(false).contents();
-                $('.figure-img', $htmlString).attr('src', imgSrc);
-                $('#dateMade', $htmlString).append((dateMade.getMonth() + 1) + "/" + dateMade.getDate() + "/" + dateMade.getFullYear());
-                $('#datePubd', $htmlString).append("Published " + timeTrial + " days ago");
-                $('#title', $htmlString).append(data.article1.nameTag);
-                $('#subtitle', $htmlString).append(data.article1.subtitle);
-                $('#qualityContent', $htmlString).append(data.article1.content);
-                $('#underCount', $htmlString).append(data.article1);
-                /*$('.figure-caption', $htmlString).append(imgCap);
-                $('#counter', $htmlString).append(counter);*/
-                $('#testHolder').before($htmlString);
-            });
-        }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            letsRock();
-        });
+        $(document).ready(letsRock());
     </script>
 </head>
 
 <body class="bg-body">
-    <nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
+    <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
         <div class="flex-row container-fluid">
             <a href="index.html" class="link-light text-decoration-none"><i
-                    class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
-            <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
+                    class="py-1 bi-journal-code m-0 flex-fill"></i></a>
+            <div class="title py-2 display-4 flex-fill ps-sm-3 h-100 d-none d-md-block">
                 Tryhard blog
             </div>
             <div class="flex-lg-grow-0">
-                <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon align-self-center"></span>
                 </button>
             </div>
             <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
@@ -75,10 +51,9 @@
             </div>
         </div>
     </nav>
-
     <main>
         <!--overarching placeholder class-->
-        <div class="ph">
+        <div class="ph mt-5 pt-3">
             <div id="testHolder"></div>
         </div>
     </main>
@@ -99,84 +74,11 @@
                     Sign-in
                 </a>
             </li>
-            <li class="ps-3 link-secondary" id="contact">
+            <li class="ps-3 link-secondary text-decoration-underline" id="contact">
                 Contact
             </li>
         </ul>
     </footer>
-
-    <!-- Modal -->
-    <div class="modal fade" id="signinmodal" tabindex="-1" aria-labelledby="gateway" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="tester">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="gateway">Gateway</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form class="row g-3" id="theBlackDoor" novalidate>
-                    <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="player" placeholder="I? I am a monument to all your sin.">
-                            <label for="floatingInput">Who Are You?</label>
-                        </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="key" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="subIt()">Sign in</button>
-                    </div>
-                </form>
-                <div class="spinner-border align-self-center mt-4" role="status" id="loader" hidden="true">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p id="isValid" class="align-self-center"></p>
-            </div>
-        </div>
-    </div>
-
-    <template id="templart">
-        <div class="card m-4 p-3">
-            <div col="d-flex">
-                <div class="flex-row">
-                    <div class="col-10 flex-column ms-3 float-start">
-                        <div class="display-3" id="title"></div>
-                        <div class="lead ms-1" id="subtitle"></div>
-                    </div>
-                    <div class="col-1 me-3 float-end py-5">
-                        <button type="button" onclick="smash('T')"
-                            class="btn btn-outline-dark bi-hand-thumbs-up col-auto" id="thatLikeButtonT"
-                            data-bs-toggle="button" autocomplete="off">
-                            <span class="col-auto badge rounded-pill bg-light text-black-50" id="counter"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <hr class="mb-2 mt-1">
-            <div class="ms-1 small text-muted text-end">
-                <div class="" id="dateMade"></div>
-                <div class="" id="datePubd"></div>
-            </div>
-            <figure class="figure">
-                <img src="" class="card-img-top img-fluid w-auto figure-img">
-                <figcaption class="figure-caption"></figcaption>
-            </figure>
-            <div class="card-body">
-                <p class="card-text" id="qualityContent"></p>
-            </div>
-
-            <div class="row align-self-end me-3">
-                <button type="button" onclick="smash('B')" class="btn btn-outline-dark bi-hand-thumbs-up col-auto"
-                    id="thatLikeButtonB" data-bs-toggle="button" autocomplete="off">
-                    <span class="col-auto badge rounded-pill bg-light text-black-50" id="underCount"></span>
-                    <!--this ^ is going to be annoying to configure, I know it, I'm so not looking forward to it, I'm really not-->
-                </button>
-            </div>
-        </div>
-    </template>
-
 </body>
 
 </html>
