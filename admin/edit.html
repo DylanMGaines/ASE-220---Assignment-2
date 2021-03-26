@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Editing:</title>
 
     <!--bootstrap css and icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -49,16 +49,18 @@
 </head>
 
 <body class="bg-body">
-    <nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
+    <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
         <div class="flex-row container-fluid">
             <a href="index.html" class="link-light text-decoration-none"><i
-                    class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
-            <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
-                Tryhard blog
-            </div>
+                class="py-1 bi-journal-code m-0 flex-fill"></i></a>
+            <a href="index.html" class="link-light flex-fill text-decoration-none">
+                <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
+                    Tryhard blog
+                </div>
+            </a>
             <div class="flex-lg-grow-0">
-                <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon align-self-center"></span>
                 </button>
             </div>
             <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
@@ -68,7 +70,7 @@
                             Home
                         </li>
                     </a>
-                    <div onclick="gtfo()" class="text-decoration-none link-light" id="signin">
+                    <div onclick="los()" class="text-decoration-none link-light" id="signin">
                         <li class="nav-link ps-3">
                             Sign Out
                         </li>
@@ -80,7 +82,7 @@
 
     <main>
         <!--overarching placeholder class-->
-        <div class="ph">
+        <div class="ph mt-5 pt-3">
             <div id="testHolder"></div>
         </div>
         <button class="btn-outline-dark rounded-pill text-center text-nowrap position-fixed rounded-circle 
@@ -104,97 +106,6 @@
             </li>
         </ul>
     </footer>
-
-    <!-- Text Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="afterFX" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="tester">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="afterFX">Edit time</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form class="row g-3" id="changingRoom">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="changee" class="form-label"></label>
-                            <textarea class="form-control" id="changee" rows="10" style="font-size: x-small;"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary disabled">Send message</button>
-                        </div>
-                    </div>
-                </form>
-                <!--possibly a button for uploading html in the future???-->
-            </div>
-        </div>
-    </div>
-    <!-- Image Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="afterFX" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="photoshop">Edit time</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form class="row g-3">
-                    <div class="modal-body">
-                        <div class="mb-3 d-flex">
-                            <div class="card-group flex-row">
-                                <div class="card w-50">
-                                    <img class="card-img-top h-auto" id='prevImg' src="">
-                                    <label id="imgLbl" for="prevImg"></label>
-                                </div>
-                                <div class="card w-50">
-                                    <img class="card-img-top h-auto" id='newImg' src="">
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary disabled">Send message</button>
-                        </div>
-                    </div>
-                </form>
-                <!--possibly a button for uploading html in the future???-->
-            </div>
-        </div>
-    </div>
-
-    <!--template for article-->
-    <template id="templart">
-        <div class="card m-4 p-3">
-            <div col="d-flex">
-                <div class="flex-row">
-                    <div class="col-10 flex-column float-start">
-                        <div class="ms-3 display-3" id="title" data-bs-toggle="modal" data-bs-target="#editModal"
-                            title='title'></div>
-                        <div class="lead ms-4" id="subtitle" data-bs-toggle="modal" title='subtile'
-                            data-bs-target="#editModal"></div>
-                    </div>
-                    <div class="col-1 me-3 float-end py-5">
-                        <button type="button" class="btn disabled btn-outline-dark bi-hand-thumbs-up col-auto"
-                            id="thatLikeButtonT" data-bs-toggle="button" autocomplete="off">
-                            <span class="col-auto badge rounded-pill bg-light text-black-50" id="counter"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <hr class="mb-2 mt-1">
-            <figure class="figure">
-                <img src="" class="card-img-top img-fluid w-auto figure-img" title='clickbait' id='clickbait'
-                    data-bs-toggle="modal" data-bs-target="#imageModal">
-                <figcaption class="figure-caption" title='figCap' data-bs-toggle="modal" data-bs-target="#editModal">
-                </figcaption>
-            </figure>
-            <!--may be changed for paragraph by paragraph editing-->
-            <div class="card-body" id="qualityContent" title='article content in html' data-bs-toggle="modal"
-                data-bs-target="#editModal">
-            </div>
-        </div>
-    </template>
-
 </body>
 
 </html>

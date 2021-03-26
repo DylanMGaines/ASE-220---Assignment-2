@@ -32,6 +32,7 @@ function letsRoll(arItem, templateString) {
     let timeTrial = Math.round(Math.abs(((new Date().getTime()) - (dateMade).getTime()) / (24 * 60 * 60 * 1000)));
     $('#datePubd', $htmlString).append('Last Updated ' + timeTrial + ' days ago');
     $('#testHolder').before($htmlString);
+    document.title = arItem.nameTag;
 }
 
 function smash(whichOne) {

@@ -22,10 +22,7 @@
 
     <script>
         $(document).ready(function() {
-            cardLoader();
-            $("#loadButton").click(function() {
-                cardLoader();
-            });
+            placehold();
         });
 
         function gtfo() {
@@ -60,7 +57,7 @@
         
         .card:hover {
             transform: scale(1.01);
-            z-index: 500;
+            z-index: 400;
             cursor: pointer;
             transition: all 0.25s ease-in-out;
             -webkit-transition: all 0.25s ease-in-out;
@@ -75,39 +72,41 @@
     </style>
 </head>
 
-<nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
-    <div class="flex-row container-fluid">
-        <a href="index.html" class="link-light text-decoration-none"><i
-                class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
-        <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
-            Tryhard blog
-        </div>
-        <div class="flex-lg-grow-0">
-            <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav mb-2 d-inline-block container-fluid">
-                <a href="index.html" class="text-decoration-none link-light">
-                    <li class="nav-link ps-3">
-                        Home
-                    </li>
-                </a>
-                <div onclick="gtfo()" class="text-decoration-none link-light" id="signin">
-                    <li class="nav-link ps-3">
-                        Sign Out
-                    </li>
-                </div>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <body class="bg-body">
+    <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
+        <div class="flex-row container-fluid">
+            <a href="index.html" class="link-light text-decoration-none"><i
+                class="py-1 bi-journal-code m-0 flex-fill"></i></a>
+            <a href="index.html" class="link-light flex-fill text-decoration-none">
+                <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
+                    Tryhard blog
+                </div>
+            </a>
+            <div class="flex-lg-grow-0">
+                <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon align-self-center"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav mb-2 d-inline-block container-fluid">
+                    <a href="index.html" class="text-decoration-none link-light">
+                        <li class="nav-link ps-3">
+                            Home
+                        </li>
+                    </a>
+                    <div onclick="gtfo()" class="text-decoration-none link-light" id="signin">
+                        <li class="nav-link ps-3">
+                            Sign Out
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <main>
         <!--overarching placeholder class-->
-        <div class="ph">
+        <div class="ph mt-5 pt-3">
             <!--card holding container class (the deck, if you will)-->
             <div class="container-md m-1 p-0 m-lg-4 p-lg-3 w-75">
                 <div class="row row-cols-1 row-cols-md-3 g-1">
@@ -141,25 +140,6 @@
             </li>
         </ul>
     </footer>
-
-    <!--template-->
-    <template id="cardTemplate">
-        <a href="edit.html" class="text-decoration-none link-dark">
-            <div class="col">
-                <div class="card">
-                    <img src="" class="card-img-top h-auto" alt="..." style="height:10rem;">
-                    <div class="card-body">
-                        <h5 class="card-title text-dark"></h5>
-                        <p class="card-text small text-body"></p>
-                    </div>
-                    <!--card body-->
-                    <div class='card-footer'><small class='text-muted'></small></div>
-                </div>
-                <!--card-->
-            </div>
-            <!--col-->
-        </a>
-    </template>
 </body>
 
 </html>

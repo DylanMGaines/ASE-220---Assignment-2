@@ -1,13 +1,51 @@
 $(document).ready(function() {
     letsRock();
-    var $eModal = $('#editModal');
+    modalLoader();
+
+    function los() {
+        oCount++;
+        if (oCount >= 3) {
+            oCount = 0;
+            loader('o');
+        }
+    }
+});
+
+function modalLoader() {
+    $.getJSON("./aAssets/modals.json", function(modals) {
+        let $modalStringI = $(modals.modal).clone(true);
+        let $modalStringE = $(modals.modal).clone(true);
+        $($modalStringI).attr('id', 'imageModal');
+        $('h5', $modalStringI).attr('id', 'imgM');
+        $($modalStringI).attr('aria-labelledby', 'imgM');
+        $('.mb-3', $modalStringI).addClass("d-flex");
+
+        $($modalStringE).attr('id', 'textModal');
+        $('h5', $modalStringE).attr('id', 'txtM');
+        $($modalStringE).attr('aria-labelledby', 'txtM');
+
+        $('.drop-zone', $modalStringI).append(modals.image);
+        $('.drop-zone', $modalStringE).append(modals.text);
+
+        $(".bg-body").append($modalStringI);
+        $(".bg-body").append($modalStringE);
+    });
+
+    //without a pause, the modaler method's event handler binding will not work
+    setTimeout(() => {
+        modaler();
+    }, 50);
+}
+
+function modaler() {
+    var $eModal = $('#textModal');
     $eModal.bind('show.bs.modal', function(event) {
         //Button that triggered the modal
-        var $trog = event.relatedTarget;
+        var $eTrigger = event.relatedTarget;
         //Extract info
-        var $titled = $trog.getAttribute('title');
-        var $contenta = $trog.innerHTML;
-        //initiate an AJAX request here
+        var $titled = $eTrigger.getAttribute('Title');
+        var $contenta = $eTrigger.innerHTML;
+        //real AJAX request here
         //do the updating in a callback.
         //
         //Update the modal's content.
@@ -20,10 +58,10 @@ $(document).ready(function() {
     var $iModal = $('#imageModal');
     $iModal.bind('show.bs.modal', function(event) {
         //image that triggered the modal
-        var $trig = event.relatedTarget;
+        var $iTrigger = event.relatedTarget;
         //Extract info from og src img
-        var $ogSrc = $trig.getAttribute('src');
-        //AJAX request here
+        var $ogSrc = $iTrigger.getAttribute('src');
+        //Real AJAX request here
         //do the updating in a callback.
         //
         //Update the modal's content.
@@ -42,12 +80,4 @@ $(document).ready(function() {
         reader.readAsDataURL(this.files[0]);
 
     });
-});
-
-function gtfo() {
-    oCount++;
-    if (oCount >= 3) {
-        oCount = 0;
-        loader('o');
-    }
 }
