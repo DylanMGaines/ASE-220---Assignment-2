@@ -59,7 +59,11 @@
     background-repeat: no-repeat;
 }
 
-#signin:hover {
+#signIn:hover {
+    cursor: pointer;
+}
+
+#signOut:hover {
     cursor: pointer;
 }
 

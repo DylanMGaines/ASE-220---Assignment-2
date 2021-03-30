@@ -1,6 +1,6 @@
 const bitsNPieces = ['#title', '#subtitle', '.counter', '.figure-caption', '#qualityContent'];
 //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
-let testingAThing = {
+let articleObject = {
     nameTag: "ph",
     subtitle: "ph",
     likes: "0",
@@ -8,41 +8,46 @@ let testingAThing = {
     content: "ph",
     pathToImg: "ph",
     desc: "ph",
-    dateMade: "ph"
+    dateMade: "ph",
+    author: "ph",
+    tags: "ph"
 };
 
 function letsRock() {
-    var aNum = window.location.search.substring(3);
+    let urlParameters = new URLSearchParams(window.location.search);
+    var aNum = urlParameters.get("a");
+    console.log(aNum);
     $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
         let template;
-        for (thing in data[aNum]) {
-            testingAThing[thing] = data[aNum][thing];
+        for (thing in data.articles[aNum]) {
+            articleObject[thing] = data.articles[aNum][thing];
         }
         $.getJSON("./aAssets/templates.json", function(templates) {
             template = templates.article;
             letsRoll(template);
         });
     });
-    console.log(testingAThing);
 }
 
 function letsRoll(templateString) {
-    console.log(testingAThing);
+    //clone template for manipulation
     let $htmlString = $(templateString).clone(true);
 
+    //incrementer variable
     let i = 0;
-    for (x in testingAThing) {
-        $(bitsNPieces[i], $htmlString).append(testingAThing[x]);
+    //loop through article object for title, subtitle, likeCount, figure caption
+    for (x in articleObject) {
+        $(bitsNPieces[i], $htmlString).append(articleObject[x]);
         if (i == 4) { break; }
         i++;
     }
-    $('#deception', $htmlString).append(testingAThing.desc);
+    $('#deception', $htmlString).append(articleObject.desc);
 
-    $('.figure-img', $htmlString).attr('src', testingAThing.pathToImg);
-    let dateMade = new Date(testingAThing['dateMade']);
-    $('#dateMade', $htmlString).append((dateMade.getMonth() + 1) + '/' + dateMade.getDate() + '/' + dateMade.getFullYear());
-    let timeTrial = Math.round(Math.abs(((new Date().getTime()) - (dateMade).getTime()) / (24 * 60 * 60 * 1000)));
+    $('.figure-img', $htmlString).attr('src', articleObject.pathToImg);
+    let dates = [new Date(articleObject['dateMade']), new Date(articleObject['lastMod'])];
+    $('#dateMade', $htmlString).append((dates[0].getMonth() + 1) + '/' + dates[0].getDate() + '/' + dates[0].getFullYear());
+    let timeTrial = Math.round(Math.abs(((new Date().getTime()) - (dates[1]).getTime()) / (24 * 60 * 60 * 1000)));
     $('#datePubd', $htmlString).append('Last Updated ' + timeTrial + ' days ago');
     $('#testHolder').before($htmlString);
-    document.title = document.title + ' ' + testingAThing.nameTag;
+    document.title = document.title + ' ' + articleObject.nameTag;
 }

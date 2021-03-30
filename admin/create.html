@@ -17,12 +17,26 @@
 
     <link href="../iCSS/theVibe.css" rel="stylesheet">
     <script src="../iJS/shrinker.js"></script>
-    <script src="../iJS/signer.js"></script>
     <script src="./aJS/articleLoader.js"></script>
     <script src="./aJS/loader.js"></script>
     <script>
+        let sending;
         $(document).ready(function() {
-            letsRock();
+            sending = {
+                nameTag: "",
+                subtitle: "",
+                likes: 0,
+                imgCap: "",
+                content: "",
+                pathToImg: "",
+                desc: "",
+                dateMade: "",
+                tags: "",
+                author: null,
+                veiws: 0
+            };
+            let urlp = new URLSearchParams(window.location.search);
+            $(".homeLink").attr("href", $("#theBook").attr("href") + urlp.get("u"));
             var $imgHolder = $('#clickBait');
             $("#formFile", $imgHolder).change(function() {
                 var reader = new FileReader();
@@ -34,21 +48,61 @@
                 $("#iPh").hide();
             });
 
-            //enctype="multipart/form-data" method="POST" action="https://jsonblob.com/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78"
             $("#commitButton").click(function() {
-                $.ajax({
-                    url: "https://jsonblob.com/api/jsonBlob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
-                    data: 'title=' + $("#title").val() + '&subtitle=' + $("#subtitle").val() + '&imgCap=' + $("#caption").val() +
-                        +'&bodyP=' + $("#body").val(),
-                    type: "PUT",
-                    success: function(data) {
-                        $("#endGame").html(data);
-                        console.log("W");
-                    },
-                    error: function() {
-                        console.log("L");
+                //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
+                let dm = new Date();
+                let imgMan;
+                if ($('#formFile').val() === "") {
+                    imgMan = "test";
+                } else {
+                    imgMan = "./media/" + $('#formFile').val().substring(12)
+                }
+                sending = {
+                    nameTag: $('#title').val(),
+                    subtitle: $('#subtitle').val(),
+                    likes: 0,
+                    imgCap: $('#caption').val(),
+                    content: $('#body').val(),
+                    pathToImg: imgMan,
+                    desc: $('#desc').val(),
+                    dateMade: dm.toJSON(),
+                    tags: $('#tags').val(),
+                    author: parseInt(window.location.search.substring(3)),
+                    veiws: 0
+                };
+
+                let sendable = true;
+                for (x in sending) {
+                    sendable = false;
+                    console.log(x);
+                    if (x == "") {
+                        sendable = false;
                     }
-                });
+                }
+
+                if (sendable) {
+                    //get current blob
+                    $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
+                        //push new item into article array
+                        data.articles.push(sending);
+
+                        //ajax time.
+                        $.ajax({
+                            type: "PUT",
+                            url: "https://jsonblob.com/api/jsonblob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
+                            contentType: "application/JSON",
+                            data: JSON.stringify(data),
+                            success: function(output, status, xhr) {
+                                console.log(xhr);
+                                console.log(xhr.getResponseHeader("Location "));
+                                //modal pop up to notify of success
+                                setTimeout(() => {
+                                    location = "index.html?u=" + parseInt(window.location.search.substring(3));
+                                }, 2000);
+                            }
+                        });
+                    });
+                }
             });
         });
     </script>
@@ -79,15 +133,16 @@
 
 <body class="bg-body">
     <!--nav-->
-    <nav class="navbar navbar-dark bg-dark text-white sticky-top primary-nav d-flex">
+    <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
         <div class="flex-row container-fluid">
             <!--journal logo thing-->
-            <a href="index.html" class="link-light text-decoration-none"><i
-                    class="py-2 bi-journal-code flex-fill flex-grow-1"></i></a>
-            <!--Title-->
-            <div class="title py-3 display-2 flex-fill px-sm-3 h-100 d-none d-md-block">
-                Tryhard blog
-            </div>
+            <a href="index.html?u=" id="theBook" class="link-light text-decoration-none homeLink"><i
+                    class="py-1 bi-journal-code m-0 flex-fill"></i></a>
+            <a href="index.html?u=" id="headText" class="link-light flex-fill text-decoration-none homeLink">
+                <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
+                    Tryhard blog
+                </div>
+            </a>
             <div class="flex-lg-grow-0">
                 <!--little 3-line thing-->
                 <button class="navbar-toggler end-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,13 +154,13 @@
             <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
                 <ul class="navbar-nav mb-2 d-inline-block container-fluid">
                     <!--home-->
-                    <a href="index.html" class="text-decoration-none link-light">
+                    <a href="index.html?u=" class="text-decoration-none link-light homeLink">
                         <li class="nav-link ps-3">
                             Home
                         </li>
                     </a>
                     <!--sign out-->
-                    <div onclick="gtfo()" class="text-decoration-none link-light" id="signin">
+                    <div onclick="los()" class="text-decoration-none link-light" id="signin">
                         <li class="nav-link ps-3">
                             Sign Out
                         </li>
@@ -117,7 +172,7 @@
     <!--main boi-->
     <main>
         <!--overarching placeholder class-->
-        <div class="ph">
+        <div class="ph mt-5 pt-3">
             <div class="card m-4 p-3">
                 <!--big form-->
                 <form id="formMan">
@@ -125,11 +180,11 @@
                         <div class="flex-row">
                             <!--title input-->
                             <div class="col-10 flex-column">
-                                <textarea name="title" class="display-3 container-fluid" rows=2 id="title" placeholder="Title"></textarea>
+                                <textarea required name="title" class="display-3 container-fluid border-0" rows=2 id="title" placeholder="Title"></textarea>
                             </div>
                             <!--subtitle input-->
-                            <div class="ms-4" id="subtitle">
-                                <textarea name="subtitle" class="lead container-fluid" rows=2 id="subtitle" placeholder="Subtitle"></textarea>
+                            <div class="ms-4">
+                                <textarea required name="subtitle" class="lead container-fluid border-0" rows=2 id="subtitle" placeholder="Subtitle"></textarea>
                             </div>
                         </div>
                     </div>
@@ -143,13 +198,17 @@
                             No Image Selected
                         </div>
                         <!--file input thing-->
-                        <input name="imgFile" class="form-control" type="file" id="formFile">
-                        <textarea name="imgCaption" class="figure-caption w-100" rows=1 id="caption" placeholder="Caption"></textarea>
+                        <input required name="imgFile" class="form-control" type="file" id="formFile">
+                        <textarea required name="imgCaption" class="figure-caption border-0 w-100" rows=1 id="caption" placeholder="Caption"></textarea>
                     </figure>
 
                     <div class="card-body">
                         <!--body paragraph input area-->
-                        <textarea name="body" class="form-control" rows=15 id="body" placeholder="body paragraph"></textarea>
+                        <textarea required name="body" id="body" class="form-control border-0" rows=15 placeholder="Body Paragraph"></textarea>
+                        <hr>
+                        <textarea required name="tags" id="tags" class="form-control" rows=3 placeholder="Tags"></textarea>
+                        <hr>
+                        <textarea required name="desc" id="desc" class="form-control" rows=3 placeholder="Description"></textarea>
                     </div>
                     <!--body-->
                 </form>
@@ -174,7 +233,7 @@
                 Links
             </li>
             <li class="ps-3">
-                <a href="index.html" class="link-secondary">
+                <a href="index.html?u=" class="link-secondary homeLink">
                     Home
                 </a>
             </li>

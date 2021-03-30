@@ -27,11 +27,13 @@
 <body class="bg-body">
     <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
         <div class="flex-row container-fluid">
-            <a href="index.html" class="link-light text-decoration-none"><i
+            <a href="#" class="link-light text-decoration-none homeLink"><i
                     class="py-1 bi-journal-code m-0 flex-fill"></i></a>
-            <div class="title py-2 display-4 flex-fill ps-sm-3 h-100 d-none d-md-block">
-                Tryhard blog
-            </div>
+            <a href="index.html" class="link-light flex-fill text-decoration-none homeLink">
+                <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
+                    Tryhard blog
+                </div>
+            </a>
             <div class="flex-lg-grow-0">
                 <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon align-self-center"></span>
@@ -39,14 +41,16 @@
             </div>
             <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
                 <ul class="navbar-nav mb-2 d-inline-block container-fluid">
-                    <a href="index.html" class="text-decoration-none link-light">
+                    <a href="index.html" class="text-decoration-none link-light homeLink">
                         <li class="nav-link ps-3">
                             Home
                         </li>
                     </a>
-                    <li class="nav-link ps-3" id="signin" data-bs-toggle="modal" data-bs-target="#signinmodal">
-                        Sign-in
-                    </li>
+                    <div class="text-decoration-none link-light">
+                        <li class="nav-link ps-3" id="sign">
+                            Sign
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -55,6 +59,17 @@
         <!--overarching placeholder class-->
         <div class="ph mt-5 pt-3">
             <div id="testHolder"></div>
+        </div>
+        <div class="toast hide position-fixed end-0 bottom-0 mb-3 me-2" id="signInToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto h5 mb-0">Heads Up!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <span class="fs-6">Please sign in to like posts, thanks!</span>
+                <br>
+                <small>Sign in can be found via the menu button at the top right of the page</small>
+            </div>
         </div>
     </main>
 
@@ -65,11 +80,11 @@
                 Links
             </li>
             <li class="ps-3">
-                <a href="index.html" class="link-secondary">
+                <a href="index.html" class="link-secondary homeLink">
                     Home
                 </a>
             </li>
-            <li class="ps-3" id="signinFoot">
+            <li class="ps-3" id="signInFoot">
                 <a href="index.html" class="link-secondary" data-bs-toggle="modal" data-bs-target="#signinmodal">
                     Sign-in
                 </a>

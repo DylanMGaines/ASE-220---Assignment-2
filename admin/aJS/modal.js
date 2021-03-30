@@ -1,14 +1,6 @@
 $(document).ready(function() {
     letsRock();
     modalLoader();
-
-    function los() {
-        oCount++;
-        if (oCount >= 3) {
-            oCount = 0;
-            loader('o');
-        }
-    }
 });
 
 function modalLoader() {

@@ -1,9 +1,8 @@
-var oCount = 0;
-
 function loader(loaded) {
     switch (loaded) {
         case 'c':
-            location = "create.html";
+            var uID = window.location.search.substring(3)
+            location = "create.html?u=" + uID;
             break;
         case 'o':
             location = "../index.html";

@@ -18,10 +18,72 @@
     <link href="../iCSS/theVibe.css" rel="stylesheet">
     <link href="./aCSS/adminVibe.css" rel="stylesheet">
     <script src="../iJS/shrinker.js"></script>
-    <script src="../iJS/signer.js"></script>
     <script src="./aJS/articleLoader.js"></script>
     <script src="./aJS/loader.js"></script>
     <script src="./aJS/modal.js"></script>
+    <script>
+        let oCount = 0;
+        let urlParameters = new URLSearchParams(window.location.search);
+        $(document).ready(function() {
+            $(".homeLink").attr("href", "index.html?u=" + urlParameters.get("u"));
+            $("#signout").click(function() {
+                oCount++;
+                if (oCount >= 3) {
+                    oCount = 0;
+                    loader('o');
+                }
+            });
+
+            $("#commitButton").click(function() {
+                //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
+                let dm = new Date();
+                let imgMan;
+                if ($('#formFile').val() === "") {
+                    imgMan = "test";
+                } else {
+                    imgMan = "./media/" + $('#formFile').val().substring(12)
+                }
+                let sending = {
+                    nameTag: $('#title').val(),
+                    subtitle: $('#subtitle').val(),
+                    likes: 0,
+                    imgCap: $('#caption').val(),
+                    content: $('#body').val(),
+                    pathToImg: imgMan,
+                    desc: $('#desc').val(),
+                    dateMade: dm.toJSON(),
+                    tags: $('#tags').val(),
+                    author: urlParameters.get("u"),
+                    views: 0
+                };
+                console.log(sending);
+                /*    //get current blob
+                    $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
+                        //update sending.views
+                        //push new item into article array
+                        data.articles.push(sending);
+                        console.log(data.articles);
+
+                        //ajax time.
+                        $.ajax({
+                            type: "PUT",
+                            url: "https://jsonblob.com/api/jsonblob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
+                            contentType: "application/JSON",
+                            data: JSON.stringify(data),
+                            success: function(output, status, xhr) {
+                                console.log(xhr);
+                                console.log(xhr.getResponseHeader("Location "));
+                                //modal pop up to notify of success
+                                setTimeout(() => {
+                                    location = "index.html?u=" + parseInt(window.location.search.substring(3));
+                                }, 2000);
+                            }
+                        })
+                    });
+                */
+            });
+        });
+    </script>
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
 
     <style>
@@ -51,9 +113,9 @@
 <body class="bg-body">
     <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
         <div class="flex-row container-fluid">
-            <a href="index.html" class="link-light text-decoration-none"><i
-                class="py-1 bi-journal-code m-0 flex-fill"></i></a>
-            <a href="index.html" class="link-light flex-fill text-decoration-none">
+            <a href="#" class="link-light text-decoration-none homeLink"><i
+                    class="py-1 bi-journal-code m-0 flex-fill"></i></a>
+            <a href="#" class="link-light flex-fill text-decoration-none homeLink">
                 <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
                     Tryhard blog
                 </div>
@@ -65,12 +127,12 @@
             </div>
             <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
                 <ul class="navbar-nav mb-2 d-inline-block container-fluid">
-                    <a href="index.html" class="text-decoration-none link-light">
+                    <a href="#" class="text-decoration-none link-light homeLink">
                         <li class="nav-link ps-3">
                             Home
                         </li>
                     </a>
-                    <div onclick="los()" class="text-decoration-none link-light" id="signin">
+                    <div class="text-decoration-none link-light" id="signout">
                         <li class="nav-link ps-3">
                             Sign Out
                         </li>
@@ -97,7 +159,7 @@
                 Links
             </li>
             <li class="ps-3">
-                <a href="index.html" class="link-secondary">
+                <a href="index.html" class="link-secondary homeLink">
                     Home
                 </a>
             </li>

@@ -1,5 +1,6 @@
 //nameTag, subtitle, pathToImg, desc, dateMade, likes, imgCap, content
 const bitsNPieces = ['.card-title', '.card-text', '.text-muted']; //title, subtitle, date updated
+let urlParameters = new URLSearchParams(window.location.search);
 
 function cardLoader(data, accessing, templateString) {
     let $htmlString = $(templateString).clone(true);
@@ -19,30 +20,27 @@ function cardLoader(data, accessing, templateString) {
 }
 
 function placehold() {
-    var currentLoaded;
+    let currentLoaded;
     $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
         //initial load (loads 6)
         let template;
         $.getJSON("./assets/templates.json", function(templates) {
             template = templates.card;
-            for (currentLoaded = 0; currentLoaded < data.length && currentLoaded < 6; currentLoaded++) {
-                cardLoader(data, (data.length - (currentLoaded + 1)), template);
+            for (currentLoaded = 0; currentLoaded < data.articles.length && currentLoaded < 6; currentLoaded++) {
+                cardLoader(data.articles, (data.articles.length - (currentLoaded + 1)), template);
             }
             //load button clicked (loads 6 more)
             $("#loadButton").click(function() {
-                for (; currentLoaded < data.length && currentLoaded < 6; currentLoaded++) {
-                    cardLoader(data, currentLoaded);
-                    console.log(data[currentLoaded]);
+                for (; currentLoaded < data.articles.length && currentLoaded < 6; currentLoaded++) {
+                    cardLoader(data.articles, currentLoaded);
+                    console.log(data.articles[currentLoaded]);
                 }
             });
         });
     });
-    $.getJSON("./assets/modals.json", function(modals) {
-        $(".bg-body").append(modals.signInModal);
-    });
+
 }
 
 function reqTime(aNum) {
-    console.log(aNum);
-    window.location.href = './article.html?a=' + aNum;
+    window.location.href = "./article.html?" + ((urlParameters.has("un")) ? 'un=' + urlParameters.get("un") : "") + '&a=' + aNum;
 }
