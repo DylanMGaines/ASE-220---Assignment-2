@@ -14,6 +14,12 @@ function signInSetUp() {
         $("#signIn").append(" In");
         $.getJSON("./assets/modals.json", function(modals) {
             $(".bg-body").append(modals.signInModal);
+            $('.form-control').keyup(function(event) {
+                let keyBoi = (!!event.keyCode) ? event.keyCode : event.which;
+                if (keyBoi == 13) {
+                    subIt();
+                }
+            });
         });
     }
 }
@@ -22,6 +28,7 @@ function subIt() {
     let un, pw, admin;
     un = $("#player").val().trim();
     pw = $("#key").val().trim();
+    let valid = false;
     $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
         for (uID in data.users) {
             if (un == data.users[uID].nameTag) {
@@ -29,13 +36,17 @@ function subIt() {
                 if (pw = data.users[uID].password) {
                     admin = data.users[uID].admin;
                     signIn(data.users[uID], admin);
+                    valid = true;
                     break;
                 }
             }
         }
+        if (!valid) {
+            $("#isValid").text("you are not worthy");
+        }
     });
 }
-//$("#isValid").text("you are not worthy");
+
 function signIn(user, admin) {
     $("#theBlackDoor").toggle();
     $("#loader").attr("hidden", false);
