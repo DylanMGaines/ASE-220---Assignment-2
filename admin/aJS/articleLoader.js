@@ -1,4 +1,4 @@
-const bitsNPieces = ['#title', '#subtitle', '.counter', '.figure-caption', '#qualityContent'];
+const bitsNPieces = ['#title', '#subtitle', '.counter', '.figure-caption', '#body'];
 //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
 let articleObject = {
     nameTag: "ph",
@@ -30,6 +30,7 @@ function letsRock() {
 }
 
 function letsRoll(templateString) {
+    document.title = document.title + ' ' + articleObject.nameTag;
     //clone template for manipulation
     let $htmlString = $(templateString).clone(true);
 
@@ -41,13 +42,15 @@ function letsRoll(templateString) {
         if (i == 4) { break; }
         i++;
     }
-    $('#deception', $htmlString).append(articleObject.desc);
+    $('#desc', $htmlString).append(articleObject.desc + "\n\n");
+    $('#tags', $htmlString).append(articleObject.tags + "\n\n");
 
     $('.figure-img', $htmlString).attr('src', articleObject.pathToImg);
+
     let dates = [new Date(articleObject['dateMade']), new Date(articleObject['lastMod'])];
     $('#dateMade', $htmlString).append((dates[0].getMonth() + 1) + '/' + dates[0].getDate() + '/' + dates[0].getFullYear());
     let timeTrial = Math.round(Math.abs(((new Date().getTime()) - (dates[1]).getTime()) / (24 * 60 * 60 * 1000)));
     $('#datePubd', $htmlString).append('Last Updated ' + timeTrial + ' days ago');
+
     $('#testHolder').before($htmlString);
-    document.title = document.title + ' ' + articleObject.nameTag;
 }

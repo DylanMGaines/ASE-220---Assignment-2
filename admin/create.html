@@ -9,6 +9,7 @@
     <!--bootstrap css and icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="icon" href="./media/journal-code.png">
 
     <!--bootstrap js/popper (bundled)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
@@ -17,93 +18,19 @@
 
     <link href="../iCSS/theVibe.css" rel="stylesheet">
     <script src="../iJS/shrinker.js"></script>
-    <script src="./aJS/articleLoader.js"></script>
     <script src="./aJS/loader.js"></script>
+    <script src="./aJS/imageLoader.js"></script>
+    <script src="./aJS/sender.js"></script>
+    <script src="./aJS/signer.js"></script>
+
     <script>
-        let sending;
+        let oCount = 0;
         $(document).ready(function() {
-            sending = {
-                nameTag: "",
-                subtitle: "",
-                likes: 0,
-                imgCap: "",
-                content: "",
-                pathToImg: "",
-                desc: "",
-                dateMade: "",
-                tags: "",
-                author: null,
-                veiws: 0
-            };
             let urlp = new URLSearchParams(window.location.search);
             $(".homeLink").attr("href", $("#theBook").attr("href") + urlp.get("u"));
-            var $imgHolder = $('#clickBait');
-            $("#formFile", $imgHolder).change(function() {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#newImg').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-                console.log($("#newImg").attr('src'));
-                $("#iPh").hide();
-            });
 
-            $("#commitButton").click(function() {
-                //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
-                let dm = new Date();
-                let imgMan;
-                if ($('#formFile').val() === "") {
-                    imgMan = "test";
-                } else {
-                    imgMan = "./media/" + $('#formFile').val().substring(12)
-                }
-                sending = {
-                    nameTag: $('#title').val(),
-                    subtitle: $('#subtitle').val(),
-                    likes: 0,
-                    imgCap: $('#caption').val(),
-                    content: $('#body').val(),
-                    pathToImg: imgMan,
-                    desc: $('#desc').val(),
-                    dateMade: dm.toJSON(),
-                    tags: $('#tags').val(),
-                    author: parseInt(window.location.search.substring(3)),
-                    veiws: 0
-                };
-
-                let sendable = true;
-                for (x in sending) {
-                    sendable = false;
-                    console.log(x);
-                    if (x == "") {
-                        sendable = false;
-                    }
-                }
-
-                if (sendable) {
-                    //get current blob
-                    $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
-                        //push new item into article array
-                        data.articles.push(sending);
-
-                        //ajax time.
-                        $.ajax({
-                            type: "PUT",
-                            url: "https://jsonblob.com/api/jsonblob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
-                            contentType: "application/JSON",
-                            data: JSON.stringify(data),
-                            success: function(output, status, xhr) {
-                                console.log(xhr);
-                                console.log(xhr.getResponseHeader("Location "));
-                                //modal pop up to notify of success
-                                setTimeout(() => {
-                                    location = "index.html?u=" + parseInt(window.location.search.substring(3));
-                                }, 2000);
-                            }
-                        });
-                    });
-                }
-            });
+            imLoader();
+            signTime();
         });
     </script>
     <noscript>Get JavaScript to properly view page</noscript>
@@ -160,7 +87,7 @@
                         </li>
                     </a>
                     <!--sign out-->
-                    <div onclick="los()" class="text-decoration-none link-light" id="signin">
+                    <div class="text-decoration-none link-light" id="signOut">
                         <li class="nav-link ps-3">
                             Sign Out
                         </li>
@@ -174,52 +101,47 @@
         <!--overarching placeholder class-->
         <div class="ph mt-5 pt-3">
             <div class="card m-4 p-3">
-                <!--big form-->
                 <form id="formMan">
                     <div col="d-flex">
                         <div class="flex-row">
-                            <!--title input-->
                             <div class="col-10 flex-column">
                                 <textarea required name="title" class="display-3 container-fluid border-0" rows=2 id="title" placeholder="Title"></textarea>
                             </div>
-                            <!--subtitle input-->
                             <div class="ms-4">
                                 <textarea required name="subtitle" class="lead container-fluid border-0" rows=2 id="subtitle" placeholder="Subtitle"></textarea>
                             </div>
                         </div>
                     </div>
                     <hr class="mb-2 mt-1">
-                    <!--figure (image and caption)-->
                     <figure class="figure" id="clickBait">
-                        <!--image (blank until loaded)-->
-                        <img src="" class="card-img-top img-fluid w-auto figure-img" id="newImg">
-                        <!--image placeholder-->
+                        <img src="" class="card-img-top img-fluid figure-img w-75" id="newImg">
                         <div class="bi-image-fill display-6 bg-secondary text-center p-5 text-white" id="iPh">
                             No Image Selected
                         </div>
-                        <!--file input thing-->
-                        <input required name="imgFile" class="form-control" type="file" id="formFile">
+                        <input required name="imgFile" class="form-control form-control-sm visually-hidden" type="file" id="formFile">
+                        <input required name="urlFile" class="form-control form-control-sm visually-hidden" type="url" placeholder="Enter URL">
                         <textarea required name="imgCaption" class="figure-caption border-0 w-100" rows=1 id="caption" placeholder="Caption"></textarea>
                     </figure>
+                    <br>
+                    <div class="btn-group pt-0" role="group">
+                        <input type="radio" class="btn-check" name="btnradio" id="imgRadio" autocomplete="off">
+                        <label class="btn btn-outline-dark" for="imgRadio">Image</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="urlRadio" autocomplete="off">
+                        <label class="btn btn-outline-dark" for="urlRadio">URL</label>
+                    </div>
 
                     <div class="card-body">
-                        <!--body paragraph input area-->
                         <textarea required name="body" id="body" class="form-control border-0" rows=15 placeholder="Body Paragraph"></textarea>
                         <hr>
                         <textarea required name="tags" id="tags" class="form-control" rows=3 placeholder="Tags"></textarea>
                         <hr>
                         <textarea required name="desc" id="desc" class="form-control" rows=3 placeholder="Description"></textarea>
                     </div>
-                    <!--body-->
                 </form>
-                <!--big form-->
-            </div>
-            <!--card div-->
-            <div id="endGame">
             </div>
         </div>
         <!--overarching placeholder class-->
-
         <!--commit button-->
         <button class="btn-outline-dark rounded-pill text-center text-nowrap position-fixed rounded-circle 
         ratio-1x1 bi-file-earmark-arrow-up fs-5 overflow-hidden" id="commitButton">

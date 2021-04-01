@@ -59,15 +59,8 @@
     background-repeat: no-repeat;
 }
 
-#signIn:hover {
-    cursor: pointer;
-}
-
-#signOut:hover {
-    cursor: pointer;
-}
-
-#contact:hover {
+#signIn:hover,
+#signOut:hover #contact:hover {
     cursor: pointer;
 }
 

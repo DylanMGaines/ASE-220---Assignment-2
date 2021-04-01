@@ -5,27 +5,28 @@ let urlParameters;
 
 function letsRock() {
     urlParameters = new URLSearchParams(window.location.search);
+
     $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
-        //initial load (loads 6)
-        let template;
-        $.getJSON("./assets/templates.json", function(templates) {
-            template = templates.article;
-            letsRoll(data, urlParameters.get("a"), template);
-            data.articles[urlParameters.get("a")].views++;
-            $.ajax({
-                type: "PUT",
-                url: "https://jsonblob.com/api/jsonblob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
-                contentType: "application/JSON",
-                data: JSON.stringify(data),
-                success: function(output, status, xhr) {
-                    console.log("views up");
-                    //modal pop up to notify of success
-                }
-            });
-        });
+        incrementViews(data)
     });
-    $.getJSON("./assets/modals.json", function(modals) {
-        $(".bg-body").append(modals.signInModal);
+}
+
+function incrementViews(data) {
+    //initial load
+    let template;
+    $.getJSON("./assets/templates.json", function(templates) {
+        template = templates.article;
+        letsRoll(data, urlParameters.get("a"), template);
+        data.articles[urlParameters.get("a")].views++;
+        $.ajax({
+            type: "PUT",
+            url: "https://jsonblob.com/api/jsonblob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
+            contentType: "application/JSON",
+            data: JSON.stringify(data),
+            success: function(output, status, xhr) {
+                console.log("views up");
+            }
+        });
     });
 }
 
@@ -55,6 +56,8 @@ function letsRoll(data, aNum, templateString) {
     let timeTrial = Math.round(Math.abs(((new Date().getTime()) - (new Date(arItem.lastMod)).getTime()) / (24 * 60 * 60 * 1000)));
     $('#datePubd', $htmlString).append('Last Updated ' + timeTrial + ' days ago');
     $('#testHolder').before($htmlString);
+    $('#loadSpinner').remove();
+    $('#testHolder').remove();
     document.title = arItem.nameTag;
 }
 

@@ -9,31 +9,25 @@
     <!--bootstrap css and icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="icon" href="./media/journal-code.png">
 
     <!--bootstrap js/popper (bundled)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
+    <!--jquery ref-->
     <script src="../assets/jquery-3.6.0.min.js"></script>
 
     <link href="../iCSS/theVibe.css" rel="stylesheet">
+
     <script src="../iJS/shrinker.js"></script>
     <script src="./aJS/loader.js"></script>
     <script src="./aJS/cardLoader.js"></script>
+    <script src="./aJS/signer.js"></script>
 
     <script>
         $(document).ready(function() {
             placehold();
-
-            let oCount = 0;
-
-            $("#signin").click(function() {
-                oCount++;
-                if (oCount >= 3) {
-                    oCount = 0;
-                    loader('o');
-                }
-            });
-
+            signTime();
         });
     </script>
     <style>
@@ -98,7 +92,7 @@
                             Home
                         </li>
                     </a>
-                    <div class="text-decoration-none link-light" id="signin">
+                    <div class="text-decoration-none link-light" id="signOut">
                         <li class="nav-link ps-3">
                             Sign Out
                         </li>

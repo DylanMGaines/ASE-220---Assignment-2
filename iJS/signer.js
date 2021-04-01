@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function signInSetUp() {
     let urlParameters = new URLSearchParams(window.location.search);
     if (urlParameters.has("un")) {
         $("#sign").attr("id", "signOut");
@@ -16,7 +16,7 @@ $(document).ready(function() {
             $(".bg-body").append(modals.signInModal);
         });
     }
-})
+}
 
 function subIt() {
     let un, pw, admin;

@@ -9,6 +9,7 @@
     <!--bootstrap css and icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="icon" href="./media/journal-code.png">
 
     <!--bootstrap js/popper (bundled)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
@@ -21,18 +22,14 @@
     <script src="./aJS/articleLoader.js"></script>
     <script src="./aJS/loader.js"></script>
     <script src="./aJS/modal.js"></script>
+    <script src="./aJS/signer.js"></script>
+
     <script>
-        let oCount = 0;
-        let urlParameters = new URLSearchParams(window.location.search);
+        let urlParameters;
         $(document).ready(function() {
+            urlParameters = new URLSearchParams(window.location.search);
             $(".homeLink").attr("href", "index.html?u=" + urlParameters.get("u"));
-            $("#signout").click(function() {
-                oCount++;
-                if (oCount >= 3) {
-                    oCount = 0;
-                    loader('o');
-                }
-            });
+            signTime();
 
             $("#commitButton").click(function() {
                 //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
@@ -44,43 +41,19 @@
                     imgMan = "./media/" + $('#formFile').val().substring(12)
                 }
                 let sending = {
-                    nameTag: $('#title').val(),
-                    subtitle: $('#subtitle').val(),
+                    nameTag: $('#title').text(),
+                    subtitle: $('#subtitle').text(),
                     likes: 0,
-                    imgCap: $('#caption').val(),
-                    content: $('#body').val(),
+                    imgCap: $('.figure-caption').text(),
+                    content: $('#body').text(),
                     pathToImg: imgMan,
-                    desc: $('#desc').val(),
+                    desc: $('#desc').text(),
                     dateMade: dm.toJSON(),
-                    tags: $('#tags').val(),
-                    author: urlParameters.get("u"),
+                    tags: $('#tags').text(),
+                    author: parseInt(urlParameters.get("u")),
                     views: 0
                 };
                 console.log(sending);
-                /*    //get current blob
-                    $.getJSON("https://jsonblob.com/api/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78/", function(data) {
-                        //update sending.views
-                        //push new item into article array
-                        data.articles.push(sending);
-                        console.log(data.articles);
-
-                        //ajax time.
-                        $.ajax({
-                            type: "PUT",
-                            url: "https://jsonblob.com/api/jsonblob/5df95c1f-8374-11eb-a0d4-a5d78bdc5d78",
-                            contentType: "application/JSON",
-                            data: JSON.stringify(data),
-                            success: function(output, status, xhr) {
-                                console.log(xhr);
-                                console.log(xhr.getResponseHeader("Location "));
-                                //modal pop up to notify of success
-                                setTimeout(() => {
-                                    location = "index.html?u=" + parseInt(window.location.search.substring(3));
-                                }, 2000);
-                            }
-                        })
-                    });
-                */
             });
         });
     </script>
@@ -132,7 +105,7 @@
                             Home
                         </li>
                     </a>
-                    <div class="text-decoration-none link-light" id="signout">
+                    <div class="text-decoration-none link-light" id="signOut">
                         <li class="nav-link ps-3">
                             Sign Out
                         </li>

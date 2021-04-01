@@ -7,13 +7,16 @@ function modalLoader() {
     $.getJSON("./aAssets/modals.json", function(modals) {
         let $modalStringI = $(modals.modal).clone(true);
         let $modalStringE = $(modals.modal).clone(true);
+
         $($modalStringI).attr('id', 'imageModal');
         $('h5', $modalStringI).attr('id', 'imgM');
+        $('#confirm', $modalStringI).attr('id', 'confirmI');
         $($modalStringI).attr('aria-labelledby', 'imgM');
         $('.mb-3', $modalStringI).addClass("d-flex");
 
         $($modalStringE).attr('id', 'textModal');
         $('h5', $modalStringE).attr('id', 'txtM');
+        $('#confirm', $modalStringE).attr('id', 'confirmE');
         $($modalStringE).attr('aria-labelledby', 'txtM');
 
         $('.drop-zone', $modalStringI).append(modals.image);
@@ -70,6 +73,5 @@ function modaler() {
             $('#newImg').attr('src', e.target.result);
         }
         reader.readAsDataURL(this.files[0]);
-
     });
 }
