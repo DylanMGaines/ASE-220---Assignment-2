@@ -11,6 +11,7 @@ function cardLoader(data, accessing, templateString) {
     $('.text-muted', $htmlString).append('Last Updated ' + timeTrial + ' days ago'); //make dynamic time unit (eg mins to days to weeks) selector
     $('.card', $htmlString).wrap("<div onclick='reqTime(" + accessing + ")' class='text-decoration-none text-body' style='cursor: pointer;'></div>");
     $('#testHolder').before($htmlString);
+    $('#loadSpinner').remove();
 }
 
 function placehold() {

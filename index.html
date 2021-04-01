@@ -43,39 +43,43 @@
     </style>
 </head>
 
-<nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
-    <div class="flex-row container-fluid">
-        <a href="index.html" class="link-light text-decoration-none homeLink"><i
-                class="py-1 bi-journal-code m-0 flex-fill"></i></a>
-        <a href="index.html" class="link-light flex-fill text-decoration-none homeLink">
-            <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
-                Tryhard blog
-            </div>
-        </a>
-        <div class="flex-lg-grow-0">
-            <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon align-self-center"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav mb-2 d-inline-block container-fluid">
-                <a href="index.html" class="text-decoration-none link-light homeLink">
-                    <li class="nav-link ps-3">
-                        Home
-                    </li>
-                </a>
-                <div class="text-decoration-none link-light">
-                    <li class="nav-link ps-3" id="sign">
-                        Sign
-                    </li>
-                </div>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <body class="bg-body">
+    <nav class="navbar navbar-dark bg-dark text-white container-fluid position-fixed m-0 primary-nav d-flex" style="z-index: 500; top: 0%;">
+        <div class="flex-row container-fluid">
+            <a href="index.html" class="link-light text-decoration-none homeLink"><i
+                    class="py-1 bi-journal-code m-0 flex-fill"></i></a>
+            <a href="index.html" class="link-light flex-fill text-decoration-none homeLink">
+                <div class="title py-2 display-4 text-st ps-sm-3 h-100 d-none d-md-block">
+                    Tryhard blog
+                </div>
+            </a>
+            <div class="flex-lg-grow-0">
+                <button class="navbar-toggler m-0 end-50 btn-sm pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon align-self-center"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse bg-transparent" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav mb-2 d-inline-block container-fluid">
+                    <a href="index.html" class="text-decoration-none link-light homeLink">
+                        <li class="nav-link ps-3">
+                            Home
+                        </li>
+                    </a>
+                    <div class="text-decoration-none link-light">
+                        <li class="nav-link ps-3" id="sign">
+                            Sign
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <main>
+        <div class="position-fixed align-baseline bg-light rounded-2 align-middle p-4" style="z-index: 600; top: 40%; left: 45%;" id="loadSpinner">
+            <div class="spinner-border text-dark">
+            </div>
+        </div>
         <!--overarching placeholder class-->
         <div class="ph mt-5 pt-3">
             <!--card holding container class (the deck, if you will)-->
@@ -98,11 +102,11 @@
                 Links
             </li>
             <li class="ps-3">
-                <a href="index.html" class="link-secondary">
+                <a href="index.html" class="link-secondary homeLink">
                     Home
                 </a>
             </li>
-            <li class="ps-3 text-decoration-underline" id="signInFoot" data-bs-toggle="modal" data-bs-target="#signinmodal" style="cursor: pointer;">
+            <li class="ps-3 text-decoration-underline link-secondary" id="signInFoot" data-bs-toggle="modal" data-bs-target="#signinmodal" style="cursor: pointer;">
                 Sign-In
             </li>
             <li class="ps-3 link-secondary text-decoration-underline" id="contact">

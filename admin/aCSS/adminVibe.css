@@ -1,9 +1,20 @@
-#title:hover,
-#subtitle:hover,
-#clickbait:hover,
-.figure-caption:hover,
-#body:hover {
-    outline-style: solid;
-    outline-color: black;
-    cursor: pointer;
+#commitButton {
+    right: 5%;
+    bottom: 5%;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+}
+
+#commitButton:hover {
+    width: 15rem;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+}
+
+#commitButton:hover::after {
+    content: "commit changes";
 }

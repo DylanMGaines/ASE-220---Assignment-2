@@ -104,6 +104,10 @@
     <main>
         <!--overarching placeholder class-->
         <div class="ph mt-5 pt-3">
+            <div class="position-fixed align-baseline bg-light rounded-2 align-middle p-4" style="z-index: 600; top: 40%; left: 45%;" id="loadSpinner">
+                <div class="spinner-border text-dark">
+                </div>
+            </div>
             <!--card holding container class (the deck, if you will)-->
             <div class="container-md m-1 p-0 m-lg-4 p-lg-3 w-75">
                 <div class="row row-cols-1 row-cols-md-3 g-1">
@@ -132,7 +136,7 @@
                     Home
                 </a>
             </li>
-            <li class="ps-3 link-secondary" id="contact">
+            <li class="ps-3 link-secondary text-decoration-underline" id="contact">
                 Contact
             </li>
         </ul>

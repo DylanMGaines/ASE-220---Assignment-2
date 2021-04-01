@@ -17,45 +17,22 @@
     <script src="../assets/jquery-3.6.0.min.js"></script>
 
     <link href="../iCSS/theVibe.css" rel="stylesheet">
+    <link href="./aCSS/adminVibe.css" rel="stylesheet">
     <script src="../iJS/shrinker.js"></script>
     <script src="./aJS/loader.js"></script>
-    <script src="./aJS/imageLoader.js"></script>
-    <script src="./aJS/sender.js"></script>
+    <script src="./aJS/articleLoader.js"></script>
     <script src="./aJS/signer.js"></script>
 
     <script>
         let oCount = 0;
         $(document).ready(function() {
+            letsRock();
             let urlp = new URLSearchParams(window.location.search);
             $(".homeLink").attr("href", $("#theBook").attr("href") + urlp.get("u"));
-
-            imLoader();
             signTime();
         });
     </script>
     <noscript>Get JavaScript to properly view page</noscript>
-    <style>
-        #commitButton {
-            right: 5%;
-            bottom: 5%;
-            width: 3rem;
-            height: 3rem;
-            transition: all 0.25s ease-in-out;
-            -webkit-transition: all 0.25s ease-in-out;
-            -moz-transition: all 0.25s ease-in-out;
-        }
-        
-        #commitButton:hover {
-            width: 15rem;
-            transition: all 0.25s ease-in-out;
-            -webkit-transition: all 0.25s ease-in-out;
-            -moz-transition: all 0.25s ease-in-out;
-        }
-        
-        #commitButton:hover::after {
-            content: "commit changes";
-        }
-    </style>
 </head>
 
 <body class="bg-body">
@@ -98,48 +75,13 @@
     </nav>
     <!--main boi-->
     <main>
+        <div class="position-fixed align-baseline bg-light rounded-2 align-middle p-4" style="z-index: 600; top: 40%; left: 45%;" id="loadSpinner">
+            <div class="spinner-border text-dark">
+            </div>
+        </div>
         <!--overarching placeholder class-->
         <div class="ph mt-5 pt-3">
-            <div class="card m-4 p-3">
-                <form id="formMan">
-                    <div col="d-flex">
-                        <div class="flex-row">
-                            <div class="col-10 flex-column">
-                                <textarea required name="title" class="display-3 container-fluid border-0" rows=2 id="title" placeholder="Title"></textarea>
-                            </div>
-                            <div class="ms-4">
-                                <textarea required name="subtitle" class="lead container-fluid border-0" rows=2 id="subtitle" placeholder="Subtitle"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mb-2 mt-1">
-                    <figure class="figure" id="clickBait">
-                        <img src="" class="card-img-top img-fluid figure-img w-75" id="newImg">
-                        <div class="bi-image-fill display-6 bg-secondary text-center p-5 text-white" id="iPh">
-                            No Image Selected
-                        </div>
-                        <input required name="imgFile" class="form-control form-control-sm visually-hidden" type="file" id="formFile">
-                        <input required name="urlFile" class="form-control form-control-sm visually-hidden" type="url" placeholder="Enter URL">
-                        <textarea required name="imgCaption" class="figure-caption border-0 w-100" rows=1 id="caption" placeholder="Caption"></textarea>
-                    </figure>
-                    <br>
-                    <div class="btn-group pt-0" role="group">
-                        <input type="radio" class="btn-check" name="btnradio" id="imgRadio" autocomplete="off">
-                        <label class="btn btn-outline-dark" for="imgRadio">Image</label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="urlRadio" autocomplete="off">
-                        <label class="btn btn-outline-dark" for="urlRadio">URL</label>
-                    </div>
-
-                    <div class="card-body">
-                        <textarea required name="body" id="body" class="form-control border-0" rows=15 placeholder="Body Paragraph"></textarea>
-                        <hr>
-                        <textarea required name="tags" id="tags" class="form-control" rows=3 placeholder="Tags"></textarea>
-                        <hr>
-                        <textarea required name="desc" id="desc" class="form-control" rows=3 placeholder="Description"></textarea>
-                    </div>
-                </form>
-            </div>
+            <div id='testHolder'></div>
         </div>
         <!--overarching placeholder class-->
         <!--commit button-->

@@ -6,6 +6,7 @@ function cardLoader(data, accessing, templateString) {
     let $htmlString = $(templateString).clone(true);
     let accessed = data[accessing];
     var i = 0;
+    $(".homeLink").attr("href", "index.html?un=" + urlParameters.get("un"));
     for (x in accessed) {
         $(bitsNPieces[i], $htmlString).append(accessed[x]);
         i++;
@@ -17,6 +18,7 @@ function cardLoader(data, accessing, templateString) {
     $('.text-muted', $htmlString).append('Last Updated ' + timeTrial + ' days ago'); //make dynamic time unit (eg days instead of weeks) selector
     $('.card', $htmlString).wrap("<div onclick='reqTime(" + accessing + ")' class='text-decoration-none text-body' style='cursor: pointer;'></div>");
     $('#testHolder').before($htmlString);
+    $('#loadSpinner').remove();
 }
 
 function placehold() {

@@ -21,66 +21,18 @@
     <script src="../iJS/shrinker.js"></script>
     <script src="./aJS/articleLoader.js"></script>
     <script src="./aJS/loader.js"></script>
-    <script src="./aJS/modal.js"></script>
     <script src="./aJS/signer.js"></script>
-
     <script>
-        let urlParameters;
+        let oCount = 0;
         $(document).ready(function() {
-            urlParameters = new URLSearchParams(window.location.search);
-            $(".homeLink").attr("href", "index.html?u=" + urlParameters.get("u"));
+            let urlp = new URLSearchParams(window.location.search);
+            letsRock();
+            sender();
             signTime();
-
-            $("#commitButton").click(function() {
-                //nameTag, subtitle, likes, imgCap, content, pathToImg, desc, dateMade
-                let dm = new Date();
-                let imgMan;
-                if ($('#formFile').val() === "") {
-                    imgMan = "test";
-                } else {
-                    imgMan = "./media/" + $('#formFile').val().substring(12)
-                }
-                let sending = {
-                    nameTag: $('#title').text(),
-                    subtitle: $('#subtitle').text(),
-                    likes: 0,
-                    imgCap: $('.figure-caption').text(),
-                    content: $('#body').text(),
-                    pathToImg: imgMan,
-                    desc: $('#desc').text(),
-                    dateMade: dm.toJSON(),
-                    tags: $('#tags').text(),
-                    author: parseInt(urlParameters.get("u")),
-                    views: 0
-                };
-                console.log(sending);
-            });
+            $(".homeLink").attr("href", "index.html?u=" + urlp.get("u"));
         });
     </script>
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
-
-    <style>
-        #commitButton {
-            right: 5%;
-            bottom: 5%;
-            width: 3rem;
-            height: 3rem;
-            transition: all 0.25s ease-in-out;
-            -webkit-transition: all 0.25s ease-in-out;
-            -moz-transition: all 0.25s ease-in-out;
-        }
-        
-        #commitButton:hover {
-            width: 15rem;
-            transition: all 0.25s ease-in-out;
-            -webkit-transition: all 0.25s ease-in-out;
-            -moz-transition: all 0.25s ease-in-out;
-        }
-        
-        #commitButton:hover::after {
-            content: "commit changes";
-        }
-    </style>
 </head>
 
 <body class="bg-body">
@@ -116,6 +68,10 @@
     </nav>
 
     <main>
+        <div class="position-fixed align-baseline bg-light rounded-2 align-middle p-4" style="z-index: 600; top: 40%; left: 45%;" id="loadSpinner">
+            <div class="spinner-border text-dark">
+            </div>
+        </div>
         <!--overarching placeholder class-->
         <div class="ph mt-5 pt-3">
             <div id="testHolder"></div>
